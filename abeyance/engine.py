@@ -35,7 +35,7 @@ class Settings:
     def from_config(cls, get: Callable[[str, object], object]) -> "Settings":
         return cls(
             expiry_hours=float(get("expiry_hours", 18.0)),
-            owners=[str(x) for x in (get("owners", []) or [])],
+            owners=[s for s in (str(x).replace("﻿", "").strip() for x in (get("owners", []) or [])) if s],
             interactive=str(get("interactive", "ask")),
             policy=PolicyConfig.from_settings({"hold": get("hold", []), "allow": get("allow", []), "workdir": get("workdir", None)}),
         )

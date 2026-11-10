@@ -190,3 +190,9 @@ def test_desktop_half_imports_only_the_sdk():
     imports = {l.split("from")[-1].strip().strip("'\"") for l in src.splitlines() if l.startswith("import ")}
     assert imports <= {"@hermes/plugin-sdk", "react", "react/jsx-runtime"}
     assert "host.composer.submit" in src and "plugin.abeyance.changed" in src
+
+
+def test_owner_ids_ignore_byte_order_mark_and_spaces():
+    from abeyance.engine import Settings
+    s = Settings.from_config(lambda k, d: {"owners": ["﻿1676349577", " 42 ", ""]}.get(k, d))
+    assert s.owners == ["1676349577", "42"]
