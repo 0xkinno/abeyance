@@ -13,9 +13,14 @@
 | Demo video | not recorded yet |
 | Catalog PR | not opened yet |
 | Built on | Hermes cron (execution identity), the approval gate, the `pre_llm_call` turn gate, subagent lifecycle, `plugin_db`, the Desktop SDK |
-| Measured | held 60 of 60 world-changing commands (56 of 60 on the first run, before four rules were added), 2 of 150 everyday commands held by mistake, 0 model calls added by a park, 33 of 33 cases passed on a real Hermes loop with a scripted model. Not yet measured: a real Telegram run and a real release |
+| Measured | held 60 of 60 world-changing commands (56 of 60 on the first run, before four rules were added), 2 of 150 everyday commands held by mistake, 0 model calls added by a park, 33 of 33 cases passed on a real Hermes loop with a scripted model. One real run on Telegram: a held `git push` and a held `gh release create` each ran after one `resume` and one tap, [release v0.0.2](https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2) |
 
-<p align="center"><img src="assets/screenshots/demo-cli.png" alt="Output of /abeyance demo" width="100%"><br><sub>Output of <code>python -m abeyance.demo</code>: a scripted run through the real Abeyance code. Telegram, Hermes approval card and Desktop captures are not taken yet.</sub></p>
+<p align="center"><img src="assets/screenshots/demo-cli.png" alt="Output of /abeyance demo" width="100%"><br><sub>Output of <code>python -m abeyance.demo</code>: a scripted run through the real Abeyance code. Desktop and drift-refusal captures are not taken yet.</sub></p>
+
+<table><tr>
+<td><img src="assets/screenshots/telegram-card.png" alt="The card in Telegram"><br><sub>Telegram, 21:00 UTC: the card for the parked <code>git push</code>.</sub></td>
+<td><img src="assets/screenshots/approval-after-resume.png" alt="Hermes approval card after resume"><br><sub>Telegram, 21:08: after <code>resume</code>, Hermes's own approval card for the exact step.</sub></td>
+</tr></table>
 
 ## 2:14 on a Tuesday
 
@@ -148,7 +153,7 @@ Reproduce every number with [PROOF.md](PROOF.md). Hermes commit `3d4dd108`, a sc
 - Everyday corpus (150): 2 held by mistake, lines 140 and 141: `rm -rf node_modules` and `rm -rf dist`.
 - Break campaign: 28 of 28 blocked or refused (drift, authority, replay, expiry, seven disguises, five misbehaving-model cases, restart across processes, fault switch).
 - Cost: a park adds 0 model requests; a drift refusal makes 0. A resume is one normal turn.
-- Real run on Telegram with a real release: not done yet.
+- Real run (Codespace, Hermes 2026.9.24, free-tier model, owner's Telegram): the nightly job parked at `git push origin main --follow-tags`; after `resume` and one tap the push ran (commit and tag v0.0.2 on `abeyance-demo`). A second job parked at `gh release create v0.0.2`; after `resume` and one tap the release was created: https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2. Five parks were recorded; two of them failed for our own reasons and are listed in [EVIDENCE.md](EVIDENCE.md).
 
 ## What we measured about cron
 
@@ -156,7 +161,7 @@ Hermes's own detector flags 6 of 6 commands that damage the machine and 9 of 60 
 
 ## Recovery
 
-- Gateway restart: parks live in SQLite under `<HERMES_HOME>/plugin-data/abeyance/`. Separate processes sharing it are tested; a literal gateway restart is not yet measured.
+- Gateway restart: parks live in SQLite under `<HERMES_HOME>/plugin-data/abeyance/`. Separate processes sharing it are tested; a literal gateway restart was measured once: a park made at 19:59 UTC survived a gateway restart at about 20:07 and was resumed at 20:08.
 - Expiry: after `expiry_hours` (default 18) the step cannot run; a new run parks again.
 - A resumed step that fails stays `resumed` and the failure is logged; the owner sees it.
 - Internal error: in a cron run the step is held; in a live chat Hermes behaves as without the plugin; a resume whose check fails is refused. `ABEYANCE_FAULT=store|policy|drift` exercises this.

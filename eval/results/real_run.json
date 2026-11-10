@@ -1,0 +1,156 @@
+{
+ "at": "2026-11-10T20:56:47Z",
+ "hermes": [
+  "Hermes Agent vgit.1b67f13 (2026.9.24) \u00b7 stable \u00b7 local 1b67f13f74cb"
+ ],
+ "release_url": "https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2",
+ "parks": [
+  {
+   "code": "MDX4",
+   "status": "denied",
+   "tool": "terminal",
+   "args_json": "{\"command\": \"git push origin main --follow-tags\", \"workdir\": \"/home/vscode/abeyance-demo\"}",
+   "classes": "[\"PUSH\"]",
+   "created_at": 1794340350.7496524,
+   "decided_at": 1794340745.4328432,
+   "executed_at": null,
+   "decided_by": "cli"
+  },
+  {
+   "code": "VVYZ",
+   "status": "resumed",
+   "tool": "terminal",
+   "args_json": "{\"command\": \"git push origin main --follow-tags\", \"workdir\": \"/home/vscode/abeyance-demo\"}",
+   "classes": "[\"PUSH\"]",
+   "created_at": 1794340796.2399035,
+   "decided_at": 1794341295.1254327,
+   "executed_at": null,
+   "decided_by": "1676349577"
+  },
+  {
+   "code": "VHKD",
+   "status": "executed",
+   "tool": "terminal",
+   "args_json": "{\"command\": \"git push origin main --follow-tags\", \"workdir\": \"/home/vscode/abeyance-demo\"}",
+   "classes": "[\"PUSH\"]",
+   "created_at": 1794342097.3113234,
+   "decided_at": 1794343057.5789878,
+   "executed_at": 1794343155.8101962,
+   "decided_by": "1676349577"
+  },
+  {
+   "code": "TJP6",
+   "status": "resumed",
+   "tool": "terminal",
+   "args_json": "{\"command\": \"gh release create v0.0.2 --generate-notes\", \"workdir\": \"/home/vscode/abeyance-demo\"}",
+   "classes": "[\"PUBLISH\"]",
+   "created_at": 1794343617.5205262,
+   "decided_at": 1794343759.3581107,
+   "executed_at": null,
+   "decided_by": "1676349577"
+  },
+  {
+   "code": "J8GV",
+   "status": "executed",
+   "tool": "terminal",
+   "args_json": "{\"command\": \"gh release create v0.0.2 --generate-notes\", \"workdir\": \"/home/vscode/abeyance-demo\"}",
+   "classes": "[\"PUBLISH\"]",
+   "created_at": 1794343997.6700876,
+   "decided_at": 1794344098.8534098,
+   "executed_at": 1794344106.877876,
+   "decided_by": "1676349577"
+  }
+ ],
+ "events": [
+  {
+   "at": 1794340350.7643852,
+   "code": "MDX4",
+   "kind": "parked",
+   "detail": "terminal ['PUSH']"
+  },
+  {
+   "at": 1794340745.4345179,
+   "code": "MDX4",
+   "kind": "denied",
+   "detail": "{\"decided_by\": \"cli\", \"decided_at\": 1794340745.4328432}"
+  },
+  {
+   "at": 1794340796.2517824,
+   "code": "VVYZ",
+   "kind": "parked",
+   "detail": "terminal ['PUSH']"
+  },
+  {
+   "at": 1794341042.3239486,
+   "code": "VVYZ",
+   "kind": "refused_actor",
+   "detail": "telegram:1676349577"
+  },
+  {
+   "at": 1794341295.127105,
+   "code": "VVYZ",
+   "kind": "resumed",
+   "detail": "{\"decided_by\": \"1676349577\", \"decided_at\": 1794341295.1254327, \"resume_session\": \"20261110_200402_36422582\"}"
+  },
+  {
+   "at": 1794341346.1626003,
+   "code": "VVYZ",
+   "kind": "step_failed",
+   "detail": "{\"output\": \"remote: Permission to 0xkinno/abeyance-demo.git denied to 0xkinno.\\nfatal: unable to access 'https://github.com/0xkinno/abeyance-demo.git/': The requested URL returned error: 403\", \"exit_code\": 128, \"error\": null}"
+  },
+  {
+   "at": 1794342097.3294551,
+   "code": "VHKD",
+   "kind": "parked",
+   "detail": "terminal ['PUSH']"
+  },
+  {
+   "at": 1794343057.580301,
+   "code": "VHKD",
+   "kind": "resumed",
+   "detail": "{\"decided_by\": \"1676349577\", \"decided_at\": 1794343057.5789878, \"resume_session\": \"20261110_200402_36422582\"}"
+  },
+  {
+   "at": 1794343155.8114476,
+   "code": "VHKD",
+   "kind": "executed",
+   "detail": "{\"executed_at\": 1794343155.8101962, \"result_excerpt\": \"{\\\"output\\\": \\\"To https://github.com/0xkinno/abeyance-demo.git\\\\n   e563e05..dc5000e  main -> main\\\\n * [new tag]         v0.0.2 -> v0.0.2\\\", \\\"exit_code\\\": 0, \\\"error\\\": null}\"}"
+  },
+  {
+   "at": 1794343617.5339122,
+   "code": "TJP6",
+   "kind": "parked",
+   "detail": "terminal ['PUBLISH']"
+  },
+  {
+   "at": 1794343759.3610291,
+   "code": "TJP6",
+   "kind": "resumed",
+   "detail": "{\"decided_by\": \"1676349577\", \"decided_at\": 1794343759.3581107, \"resume_session\": \"20261110_200402_36422582\"}"
+  },
+  {
+   "at": 1794343773.3797886,
+   "code": "TJP6",
+   "kind": "step_failed",
+   "detail": "{\"output\": \"HTTP 403: Resource not accessible by integration (https://api.github.com/repos/0xkinno/abeyance-demo/releases)\", \"exit_code\": 1, \"error\": null}"
+  },
+  {
+   "at": 1794343997.6823344,
+   "code": "J8GV",
+   "kind": "parked",
+   "detail": "terminal ['PUBLISH']"
+  },
+  {
+   "at": 1794344098.854648,
+   "code": "J8GV",
+   "kind": "resumed",
+   "detail": "{\"decided_by\": \"1676349577\", \"decided_at\": 1794344098.8534098, \"resume_session\": \"20261110_200402_36422582\"}"
+  },
+  {
+   "at": 1794344106.8792315,
+   "code": "J8GV",
+   "kind": "executed",
+   "detail": "{\"executed_at\": 1794344106.877876, \"result_excerpt\": \"{\\\"output\\\": \\\"https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2\\\", \\\"exit_code\\\": 0, \\\"error\\\": null}\"}"
+  }
+ ]
+}
