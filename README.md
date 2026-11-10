@@ -10,7 +10,7 @@
 |---|---|
 | Install | `hermes plugins install 0xkinno/abeyance#abeyance`, then set `owners` to your Telegram user id (message @userinfobot to read it) |
 | Try in about 5 seconds | `/abeyance demo` or `hermes abeyance demo` (no model key, no setup) |
-| Demo video | not recorded yet |
+| Demo video | 87.7 s film, link added once posted |
 | Catalog PR | [NousResearch/hermes-agent#152854](https://github.com/NousResearch/hermes-agent/pull/152854) |
 | Built on | Hermes cron (execution identity), the approval gate, the `pre_llm_call` turn gate, subagent lifecycle, `plugin_db`, the Desktop SDK |
 | Measured | held 56 of 60 world-changing commands on the first run and 60 of 60 after four rules were added (tuned on that corpus), 2 of 150 everyday commands held by mistake, 0 model calls added by a park, 33 of 33 cases passed on a real Hermes loop with a scripted model. One real run on Telegram: a held `git push` and a held `gh release create` each ran after one `resume` and one tap, [release v0.0.2](https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2) |

@@ -72,9 +72,9 @@ Mark `[x]` only when done and verified. Order is by dependency. Details: `ABEYAN
 - [ ] Playwright Chromium check at 390, 768, 1440 px; zero console errors; contrast AA
 
 ## Phase 7. Red team, list, submit
-- [ ] Five-role judge red team; `REDTEAM_LOG.md`; repeat until a clean round
+- [ ] Five-role judge red team; `REDTEAM_LOG.md`; repeat until a clean round (round 1 done and fixed; round 2 not run)
 - [x] Ask Kinnoski, then open catalog PR from the fork (`plugin-catalog/abeyance.yaml`, pinned SHA)
-- [ ] Video under 90 s recorded and approved
+- [ ] Video under 90 s recorded and approved (recorded, 87.7 s, awaiting approval)
 - [ ] Ask Kinnoski, then post on X tagging @NousResearch
 - [ ] Ask Kinnoski, then submit Typeform (PR link + X link); save confirmation
 - [ ] Final SHA bump in the PR if needed (version bumped, screenshot URLs re-pinned)

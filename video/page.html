@@ -2,29 +2,37 @@
 <html lang="en"><head><meta charset="utf-8">
 <title>Abeyance film</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Manrope:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#FBF3E6;--cream2:#F3E4CC;--paper:#FFFDF8;--ink:#1E1A16;--orange:#F26A1B;--orange2:#FF9A55;--peach:#FFDDBF;--amber:#F5A524;--green:#2E9E6B;--red:#D6452B;--muted:#7A6A58;--line:#E6D5BC}
+:root{--cream:#FBF3E6;--cream2:#F3E4CC;--paper:#FFFDF8;--ink:#24180F;--espresso:#2A1C12;--espresso2:#150D07;--gold:#C98A3B;--orange:#F26A1B;--orange2:#FF9A55;--peach:#FFDDBF;--amber:#F5A524;--green:#2E9E6B;--red:#D6452B;--muted:#7A6A58;--line:#E6D5BC}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream);font-family:Inter,system-ui,sans-serif;color:var(--ink)}
+html{font-synthesis:none}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream);font-family:Manrope,system-ui,sans-serif;color:var(--ink)}
 #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 .abs{position:absolute}
-.serif{font-family:'Instrument Serif',serif;font-weight:400}
-.mono{font-family:'JetBrains Mono',monospace}
+.serif{font-family:'Bodoni Moda',serif;font-weight:500;font-variation-settings:'opsz' 22}
+.mono{font-family:'DM Mono',monospace}
 #bgdots{position:absolute;inset:0;background-image:radial-gradient(circle,#E2CDAE 1.6px,transparent 1.8px);background-size:44px 44px;opacity:.55}
 .blob{position:absolute;border-radius:50%;filter:blur(90px)}
-#chrome .brand{position:absolute;left:84px;top:44px;display:flex;align-items:center;gap:14px;font-weight:600;font-size:26px;letter-spacing:.2px}
-#chrome .evt{position:absolute;right:84px;top:50px;font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--muted);letter-spacing:1.5px}
-#prog{position:absolute;left:0;bottom:0;height:6px;background:var(--orange);width:0}
-#cap{position:absolute;left:260px;right:260px;bottom:46px;height:84px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:33px;line-height:1.25;font-weight:500;color:var(--ink);letter-spacing:.1px}
+#chrome .brand{position:absolute;left:84px;top:40px;display:flex;align-items:center;gap:14px;font-family:'Bodoni Moda',serif;font-weight:700;font-size:30px;letter-spacing:.3px;font-variation-settings:'opsz' 11}
+#chrome .evt{position:absolute;right:84px;top:50px;font-family:'DM Mono',monospace;font-size:16px;color:var(--muted);letter-spacing:3px}
+#prog{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,#FFB877,#F26A1B);width:0;z-index:46}
+#cap{position:absolute;left:240px;right:240px;bottom:40px;height:92px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:Manrope,sans-serif;font-weight:600;font-size:33px;line-height:1.25;color:var(--ink);letter-spacing:-.1px;z-index:45}
+#capin{display:inline-block;padding:12px 30px;border-radius:24px;background:rgba(255,251,244,.86);border:1.5px solid rgba(242,106,27,.18);box-shadow:0 18px 36px -22px rgba(120,60,10,.5);max-width:1440px}
 .scene{position:absolute;inset:0;opacity:0;visibility:hidden}
-.card{background:var(--paper);border:2px solid var(--line);border-radius:28px;box-shadow:0 22px 50px -26px rgba(120,70,20,.35)}
-.chip{display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:999px;background:var(--paper);border:2px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:22px;white-space:nowrap}
-.chip.o{background:var(--orange);color:#fff;border-color:var(--orange)}
-.chip.p{background:var(--peach);border-color:#FFC595}
-.lab{font-family:'JetBrains Mono',monospace;font-size:19px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.card{position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,#FFF8EC 100%);border:1.5px solid rgba(242,106,27,.16);border-radius:30px;
+ box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 2px 4px rgba(120,70,20,.06),0 30px 60px -30px rgba(150,80,20,.45)}
+.card::after,.node::after,.step::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+ background:linear-gradient(105deg,transparent calc(var(--sx,-30%) - 14%),rgba(255,255,255,.75) var(--sx,-30%),transparent calc(var(--sx,-30%) + 14%));mix-blend-mode:soft-light}
+.card.abs{position:absolute}
+.card.dark{background:linear-gradient(160deg,#35241A 0%,#1B120B 100%);color:#FBF3E6;border-color:rgba(255,154,85,.28);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 34px 60px -28px rgba(30,12,2,.7)}
+.card.dark .lab{color:#D9B896}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF6E8);border:1.5px solid rgba(242,106,27,.22);font-family:'DM Mono',monospace;font-weight:500;font-size:21px;white-space:nowrap;box-shadow:0 8px 18px -12px rgba(150,80,20,.5)}
+.chip.o{background:linear-gradient(180deg,#FF8A3D,#F26A1B);color:#fff;border-color:#F26A1B;box-shadow:0 10px 22px -10px rgba(242,106,27,.75)}
+.chip.p{background:linear-gradient(180deg,#FFE7CF,#FFD9B5);border-color:#FFC595}
+.lab{font-family:'DM Mono',monospace;font-weight:500;font-size:18px;letter-spacing:3.2px;color:var(--muted);text-transform:uppercase}
 /* phone */
-.phone{position:absolute;width:430px;height:800px;background:#1E1A16;border-radius:68px;padding:14px;box-shadow:0 40px 80px -30px rgba(60,30,5,.55)}
+.phone{position:absolute;width:430px;height:800px;background:linear-gradient(145deg,#4A3A2E 0%,#17100A 40%,#2C2018 100%);border-radius:68px;padding:13px;box-shadow:0 0 0 2px #6B5646 inset,0 50px 90px -30px rgba(60,25,3,.7),0 0 0 8px rgba(255,255,255,.35)}
 .screen{position:relative;width:402px;height:772px;border-radius:54px;overflow:hidden;background:linear-gradient(180deg,#FBEBD6,#F7DDBF)}
 .notch{position:absolute;left:50%;top:14px;width:118px;height:32px;margin-left:-59px;border-radius:20px;background:#1E1A16;z-index:5}
 .tghead{position:absolute;left:0;right:0;top:0;height:112px;background:#fff;border-bottom:2px solid var(--line);display:flex;align-items:flex-end;gap:14px;padding:0 22px 14px;z-index:4}
@@ -32,16 +40,16 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream);fon
 .tghead b{display:block;font-size:22px;line-height:1.1}
 .tghead span{font-size:16px;color:var(--muted)}
 .chat{position:absolute;left:0;right:0;top:128px;bottom:12px;padding:0 14px;overflow:hidden}
-.bub{position:absolute;max-width:356px;padding:14px 16px;border-radius:22px;font-size:20px;line-height:1.3;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.05)}
+.bub{position:absolute;max-width:356px;padding:14px 16px;border-radius:22px;font-size:19.5px;line-height:1.32;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.05),0 14px 24px -16px rgba(120,60,10,.5)}
 .bub.me{background:var(--orange);color:#fff;border-bottom-right-radius:6px;right:14px}
 .bub.bot{left:14px;border-bottom-left-radius:6px}
-.bub .m{font-family:'JetBrains Mono',monospace;font-size:17px;background:#FFF1E2;border-radius:8px;padding:3px 7px;display:inline-block;margin:3px 0}
+.bub .m{font-family:'DM Mono',monospace;font-size:17px;background:#FFF1E2;border-radius:8px;padding:3px 7px;display:inline-block;margin:3px 0}
 .bub .hl{color:var(--orange);font-weight:700}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:50px;border-radius:14px;background:#E9F6EF;border:2px solid #BFE5D2;font-weight:600;font-size:19px;color:#1D6B49}
 .btn.d{background:#FBE7E2;border-color:#F3C2B8;color:#9A2D1B}
-.node{position:absolute;border-radius:22px;background:var(--paper);border:2px solid var(--line);padding:18px 24px}
-.step{position:absolute;display:flex;align-items:center;gap:20px;border-radius:24px;background:var(--paper);border:2px solid var(--line);padding:0 28px}
-.step .t{font-weight:600;font-size:30px}
+.node{position:absolute;overflow:hidden;border-radius:26px;background:linear-gradient(180deg,#FFFFFF,#FFF8EC);border:1.5px solid rgba(242,106,27,.16);padding:18px 24px;box-shadow:0 1px 0 #fff inset,0 26px 50px -30px rgba(150,80,20,.45)}
+.step{position:absolute;overflow:hidden;display:flex;align-items:center;gap:20px;border-radius:26px;background:linear-gradient(180deg,#FFFFFF,#FFF8EC);border:1.5px solid rgba(242,106,27,.16);padding:0 28px;box-shadow:0 1px 0 #fff inset,0 22px 44px -28px rgba(150,80,20,.45)}
+.step .t{font-weight:700;font-size:30px;letter-spacing:-.4px}
 .step .s{font-size:21px;color:var(--muted);margin-top:4px}
 .dot{width:46px;height:46px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:#E9F6EF;border:2px solid #BFE5D2}
 .dot.a{background:#FFF1D6;border-color:#FFD58A}
@@ -52,8 +60,15 @@ svg{display:block;overflow:visible}
 </style></head>
 <body><div id="stage">
 <div id="bgdots"></div>
-<div class="blob" id="b1" style="width:620px;height:620px;background:#FFC48F;opacity:.55;left:-160px;top:-180px"></div>
+<div class="blob" id="b1" style="width:760px;height:760px;background:#FFB877;opacity:.6;left:-240px;top:-260px"></div>
+<div class="blob" id="b3" style="width:520px;height:520px;background:#FFE2BF;opacity:.9;left:760px;top:-300px"></div>
+<svg id="arcs" class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" stroke="#F26A1B">
+  <circle cx="1920" cy="1080" r="520" stroke-opacity=".10" stroke-width="1.5"/><circle cx="1920" cy="1080" r="640" stroke-opacity=".08" stroke-width="1.5"/><circle cx="1920" cy="1080" r="760" stroke-opacity=".06" stroke-width="1.5"/>
+  <circle cx="0" cy="0" r="420" stroke-opacity=".10" stroke-width="1.5"/><circle cx="0" cy="0" r="540" stroke-opacity=".07" stroke-width="1.5"/></svg>
 <div class="blob" id="b2" style="width:700px;height:700px;background:#FFD9B0;opacity:.65;right:-220px;bottom:-260px"></div>
+<div id="grain" style="position:absolute;inset:0;z-index:40;pointer-events:none;opacity:.07;mix-blend-mode:multiply"><svg width="1920" height="1080"><filter id="nz"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .3  0 0 0 0 .2  0 0 0 0 .1  0 0 0 .9 0"/></filter><rect width="1920" height="1080" filter="url(#nz)"/></svg></div>
+<div id="vig" style="position:absolute;inset:0;z-index:39;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(120,60,10,.16) 100%)"></div>
+<div id="chap" class="mono" style="position:absolute;left:0;width:1920px;top:52px;text-align:center;font-size:17px;letter-spacing:5px;color:#8A6B4C;z-index:3"></div>
 <div id="chrome">
   <div class="brand"><svg width="30" height="38" viewBox="0 0 60 76"><use href="#hg"/></svg><span>Abeyance</span></div>
   <div class="evt">HERMES AGENT PLUGIN HACKATHON</div>
@@ -69,8 +84,8 @@ svg{display:block;overflow:visible}
 <div class="scene" id="s1">
   <svg class="abs" data-in="0.2" data-d="0.9" data-s="0.7" style="left:840px;top:130px" width="240" height="300" viewBox="0 0 60 76"><use href="#hg"/>
     <rect id="sandfall" x="29.2" y="40" width="1.6" height="26" fill="#F26A1B"/></svg>
-  <div id="s1title" class="abs serif" style="left:0;width:1920px;top:430px;text-align:center;font-size:250px;line-height:1;letter-spacing:-4px"></div>
-  <div class="abs mono" data-in="1.5" data-dy="18" style="left:0;width:1920px;top:720px;text-align:center;font-size:30px;color:var(--muted)">a matter held, not dropped, until its owner decides</div>
+  <div id="s1title" class="abs serif" style="left:0;width:1920px;top:445px;text-align:center;font-size:210px;line-height:1;letter-spacing:-3px;font-weight:500"></div>
+  <div class="abs mono" data-in="1.5" data-dy="18" style="left:0;width:1920px;top:722px;text-align:center;font-size:30px;color:var(--muted);font-family:'Bodoni Moda',serif;font-style:italic;font-weight:500;font-variation-settings:'opsz' 12;letter-spacing:.3px">a matter held, not dropped, until its owner decides</div>
   <div class="abs" style="left:0;width:1920px;top:810px;display:flex;justify-content:center;gap:18px">
     <span class="chip p" data-in="2.1" data-dy="22">Hermes cron</span>
     <span class="chip p" data-in="2.3" data-dy="22">approval gate</span>
@@ -89,7 +104,7 @@ svg{display:block;overflow:visible}
     <line id="hh" x1="100" y1="100" x2="100" y2="54" stroke="#1E1A16" stroke-width="7" stroke-linecap="round"/>
     <line id="mh" x1="100" y1="100" x2="100" y2="34" stroke="#1E1A16" stroke-width="5" stroke-linecap="round"/>
     <line id="sh" x1="100" y1="112" x2="100" y2="28" stroke="#F26A1B" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="100" r="7" fill="#F26A1B"/></svg>
-  <div class="abs serif" data-in="0.9" data-dy="30" style="left:110px;top:455px;width:680px;text-align:center;font-size:215px;line-height:1;letter-spacing:-3px" id="digi">02:14</div>
+  <div class="abs serif" data-in="0.9" data-dy="30" style="left:110px;top:470px;width:680px;text-align:center;font-size:190px;line-height:1;letter-spacing:-2px;font-weight:500" id="digi">02:14</div>
   <div class="abs lab" data-in="1.2" style="left:110px;top:690px;width:680px;text-align:center">tuesday, lisbon</div><div class="abs" style="display:none"></div>
   <div class="abs" data-in="1.4" data-dy="20" style="left:110px;top:748px;display:flex;gap:12px;flex-wrap:wrap;width:700px;justify-content:center">
     <span class="chip p"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" fill="#F26A1B"/></svg>Ines Duarte, illustrative</span>
@@ -107,9 +122,9 @@ svg{display:block;overflow:visible}
 
 <!-- ================= S3 PARK ================= -->
 <div class="scene" id="s3">
-  <div class="node" data-in="0.5" data-dx="-40" style="left:130px;top:150px;width:880px;height:112px;display:flex;align-items:center;gap:20px">
-    <svg width="42" height="42" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="#1E1A16" stroke-width="2"/><path d="M7 10l3 2-3 2M12 15h5" fill="none" stroke="#1E1A16" stroke-width="2" stroke-linecap="round"/></svg>
-    <div><div class="lab">the agent reaches a step</div><div class="mono" style="font-size:29px;font-weight:700;margin-top:6px">git push origin main --follow-tags</div></div></div>
+  <div class="node" data-in="0.5" data-dx="-40" style="left:130px;top:150px;width:880px;height:112px;display:flex;align-items:center;gap:20px;background:linear-gradient(160deg,#35241A,#1B120B);border-color:rgba(255,154,85,.3);color:#FBF3E6">
+    <svg width="42" height="42" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="#FF9A55" stroke-width="2"/><path d="M7 10l3 2-3 2M12 15h5" fill="none" stroke="#FF9A55" stroke-width="2" stroke-linecap="round"/></svg>
+    <div><div class="lab" style="color:#D9B896">the agent reaches a step</div><div class="mono" style="font-size:29px;font-weight:700;margin-top:6px">git push origin main --follow-tags</div></div></div>
   <svg class="abs" style="left:540px;top:262px" width="40" height="70" viewBox="0 0 40 70"><path data-draw="1.0,0.5" pathLength="1" d="M20 4v52M10 46l10 12 10-12" fill="none" stroke="#F26A1B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <div class="node" data-in="1.2" data-dx="-40" style="left:130px;top:332px;width:880px;height:132px;background:#FFF4E6;border-color:#FFC595;display:flex;align-items:center;justify-content:space-between">
     <div><div class="lab">hook · before the step runs</div><div class="mono" style="font-size:36px;font-weight:700;margin-top:6px;color:var(--orange)">pre_tool_call</div></div>
@@ -122,10 +137,10 @@ svg{display:block;overflow:visible}
       <div data-in="4.4" data-dx="-20" style="display:flex;gap:14px;align-items:center"><span class="dot" style="width:36px;height:36px"><svg width="22" height="20" viewBox="0 0 32 28"><use href="#ck" data-draw="4.6,0.3"/></svg></span>run frozen: no other action runs after it</div>
       <div data-in="5.3" data-dx="-20" style="display:flex;gap:14px;align-items:center"><span class="dot" style="width:36px;height:36px"><svg width="22" height="20" viewBox="0 0 32 28"><use href="#ck" data-draw="5.5,0.3"/></svg></span>steps 1 and 2 kept in plugin_db, survive a restart</div>
     </div></div>
-  <svg class="abs" style="left:1030px;top:640px" width="270" height="110" viewBox="0 0 270 110"><path data-draw="6.0,0.8" pathLength="1" d="M0 55H250M232 38l20 17-20 17" fill="none" stroke="#F26A1B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1"/><text x="0" y="28" font-family="JetBrains Mono" font-size="19" fill="#7A6A58" data-in="6.0" id="t3a">transform_llm_output</text><text x="0" y="96" font-family="JetBrains Mono" font-size="19" fill="#7A6A58">the card, not a model</text></svg>
-  <div class="phone" data-in="5.4" data-dy="60" style="left:1330px;top:112px"><div class="screen"><div class="notch"></div>
+  <svg class="abs" style="left:1030px;top:640px" width="270" height="110" viewBox="0 0 270 110"><path data-draw="6.0,0.8" pathLength="1" d="M0 55H250M232 38l20 17-20 17" fill="none" stroke="#F26A1B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1"/><text x="0" y="28" font-family="DM Mono" font-size="19" fill="#7A6A58" data-in="6.0" id="t3a">transform_llm_output</text><text x="0" y="96" font-family="DM Mono" font-size="19" fill="#7A6A58" data-in="6.0">the card, not a model</text></svg>
+  <div class="phone" data-in="1.0" data-dy="60" style="left:1330px;top:112px"><div class="screen"><div class="notch"></div>
     <div class="tghead"><div class="av"><svg width="22" height="28" viewBox="0 0 60 76"><g fill="none" stroke="#fff" stroke-width="6"><path d="M8 4h44M8 72h44M12 4c0 22 14 28 18 34-4 6-18 12-18 34M48 4c0 22-14 28-18 34 4 6 18 12 18 34"/></g></svg></div><div><b>Abeyance</b><span>bot</span></div></div>
-    <div class="chat"><div class="bub bot" data-in="6.8" data-dy="26" style="top:6px;width:372px;font-size:19.5px"><b>Abeyance: your job "Nightly release (demo)" is waiting for you.</b><br>It stopped before one step it may not take alone:<br><span class="m">git push origin main --follow-tags</span><br>why held: changes a shared git remote<br>What already happened: <b>1.</b> npm test ok, <b>2.</b> npm version patch ok<br>Reply <span class="hl">resume VHKD</span> to finish from this step. Hermes will ask you to confirm the command itself.<div class="mono" style="font-size:15px;color:#9A8870;margin-top:8px">expires in 18 h · nothing runs until you answer</div></div>
+    <div class="chat"><div class="bub bot" data-in="2.2" data-out="6.7" data-d="0.4" style="top:6px;width:96px;padding:16px 18px"><svg width="60" height="14" viewBox="0 0 60 14"><circle cx="8" cy="7" r="5" fill="#C9B79F"/><circle cx="30" cy="7" r="5" fill="#B8A38A"/><circle cx="52" cy="7" r="5" fill="#A8917A"/></svg></div><div class="bub bot" data-in="6.8" data-dy="26" style="top:6px;width:372px;font-size:19.5px"><b>Abeyance: your job "Nightly release (demo)" is waiting for you.</b><br>It stopped before one step it may not take alone:<br><span class="m">git push origin main --follow-tags</span><br>why held: changes a shared git remote<br>What already happened: <b>1.</b> npm test ok, <b>2.</b> npm version patch ok<br>Reply <span class="hl">resume VHKD</span> to finish from this step. Hermes will ask you to confirm the command itself.<div class="mono" style="font-size:15px;color:#9A8870;margin-top:8px">expires in 18 h · nothing runs until you answer</div></div>
       <div class="bub bot" data-in="8.8" data-dy="20" style="top:462px;width:372px;background:#FFF1E2;font-size:19px"><b>Written by code.</b> No model wrote this card and none was called to send it.</div></div>
   </div></div>
 </div>
@@ -151,7 +166,7 @@ svg{display:block;overflow:visible}
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><div class="btn" id="btnOnce">Allow Once</div><div class="btn">Session</div><div class="btn">Always</div><div class="btn d">Deny</div></div>
         <div id="apdone" style="display:none;margin-top:10px;font-size:17px;font-weight:600;color:#1D6B49">Approved once by you</div>
       </div>
-      <div class="bub bot" id="resdone" data-in="14.0" data-dy="26" style="top:458px;width:372px;font-size:19px"><b>Job completed what was approved.</b><br>git push origin main --follow-tags: <span class="hl" style="color:#1D6B49">succeeded</span>. Pushed commit dc5000e and tag v0.0.2.</div>
+      <div class="bub bot" id="resdone" data-in="14.0" data-dy="26" style="top:458px;width:372px;font-size:19px"><b>Job completed what was approved.</b><br><span class="m">git push origin main --follow-tags</span><br><span class="hl" style="color:#1D6B49">succeeded</span>. Pushed commit <span class="m">dc5000e</span> and tag <span class="m">v0.0.2</span>.</div>
       <div class="abs" id="tap" style="width:62px;height:62px;border-radius:50%;background:rgba(242,106,27,.35);border:3px solid var(--orange);left:60px;top:430px;opacity:0"></div>
     </div>
   </div></div>
@@ -174,21 +189,21 @@ svg{display:block;overflow:visible}
     <line x1="60" y1="60" x2="880" y2="60" stroke="#E6D5BC" stroke-width="5" stroke-linecap="round"/>
     <line data-draw="2.6,1.0" pathLength="1" x1="60" y1="60" x2="880" y2="60" stroke="#F26A1B" stroke-width="5" stroke-linecap="round" stroke-dasharray="1"/>
     <circle cx="60" cy="60" r="20" fill="#2E9E6B" data-in="2.2" data-s="0.2"/><circle cx="880" cy="60" r="20" fill="#F5A524" data-in="3.6" data-s="0.2"/>
-    <text x="60" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="21" fill="#1E1A16" font-weight="700">3532717</text><text x="60" y="146" text-anchor="middle" font-family="Inter" font-size="18" fill="#7A6A58">shown on the card</text>
-    <text x="880" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="21" fill="#1E1A16" font-weight="700">1a86ac1</text><text x="880" y="146" text-anchor="middle" font-family="Inter" font-size="18" fill="#7A6A58">landed after it</text></svg>
-  <div class="card abs" data-in="4.6" data-dy="30" style="left:760px;top:530px;width:330px;height:270px;text-align:center"><div class="lab" style="margin-top:28px">steps run</div><div class="serif" id="n1" style="font-size:150px;line-height:1.1;color:var(--green)">0</div><div class="lab">nothing ran</div></div>
-  <div class="card abs" data-in="5.0" data-dy="30" style="left:1115px;top:530px;width:330px;height:270px;text-align:center"><div class="lab" style="margin-top:28px">model calls</div><div class="serif" id="n2" style="font-size:150px;line-height:1.1;color:var(--green)">0</div><div class="lab">pre_llm_call block</div></div>
-  <div class="card abs" data-in="5.8" data-dy="30" style="left:1470px;top:530px;width:340px;height:270px;padding:28px;display:flex;flex-direction:column;justify-content:center"><div class="lab">she is told</div><div style="font-size:27px;font-weight:600;margin-top:12px;line-height:1.25">exactly what changed, and nothing is guessed</div></div>
+    <text x="60" y="118" text-anchor="middle" font-family="DM Mono" font-size="21" fill="#1E1A16" font-weight="700">3532717</text><text x="60" y="146" text-anchor="middle" font-family="Manrope" font-size="18" fill="#7A6A58">shown on the card</text>
+    <text x="880" y="118" text-anchor="middle" font-family="DM Mono" font-size="21" fill="#1E1A16" font-weight="700">1a86ac1</text><text x="880" y="146" text-anchor="middle" font-family="Manrope" font-size="18" fill="#7A6A58">landed after it</text></svg>
+  <div class="card dark abs" data-in="4.6" data-dy="30" style="left:760px;top:530px;width:330px;height:270px;text-align:center"><div class="lab" style="margin-top:28px">steps run</div><div class="serif" id="n1" style="font-size:150px;line-height:1.1;color:#5FD3A0">0</div><div class="lab">nothing ran</div></div>
+  <div class="card dark abs" data-in="5.0" data-dy="30" style="left:1115px;top:530px;width:330px;height:270px;text-align:center"><div class="lab" style="margin-top:28px">model calls</div><div class="serif" id="n2" style="font-size:150px;line-height:1.1;color:#5FD3A0">0</div><div class="lab">pre_llm_call block</div></div>
+  <div class="card dark abs" data-in="5.8" data-dy="30" style="left:1470px;top:530px;width:340px;height:270px;padding:28px;display:flex;flex-direction:column;justify-content:center"><div class="lab">she is told</div><div style="font-size:27px;font-weight:600;margin-top:12px;line-height:1.25">exactly what changed, and nothing is guessed</div></div>
   <span class="chip p abs" data-in="6.0" style="left:760px;top:830px;font-size:18px">scripted run, real Abeyance code</span>
 </div>
 
 <!-- ================= S6 BREAK ================= -->
 <div class="scene" id="s6">
   <div id="tiles"></div>
-  <div class="card abs" data-in="5.8" data-dy="30" style="left:110px;top:800px;width:1700px;height:100px;display:flex;align-items:center;justify-content:space-around;border:3px solid var(--orange)">
-    <div style="display:flex;align-items:baseline;gap:14px"><span class="serif" id="c28" style="font-size:64px;color:var(--orange)">0</span><span style="font-size:25px;font-weight:600">of 28 break cases blocked</span></div>
-    <div id="m2" style="display:flex;align-items:baseline;gap:14px"><span class="serif" style="font-size:64px;color:var(--orange)">2</span><span style="font-size:25px;font-weight:600">of 150 everyday commands held by mistake</span></div>
-    <div style="display:flex;align-items:baseline;gap:14px"><span class="serif" style="font-size:64px;color:var(--orange)">0</span><span style="font-size:25px;font-weight:600">model calls added by a park</span></div></div>
+  <div class="card dark abs" data-in="5.8" data-dy="30" style="left:110px;top:800px;width:1700px;height:100px;display:flex;align-items:center;justify-content:space-around">
+    <div style="display:flex;align-items:baseline;gap:14px"><span class="serif" id="c28" style="font-size:66px;color:#FF9A55">0</span><span style="font-size:24px;font-weight:600;color:#FBF3E6">of 28 break cases blocked</span></div>
+    <div id="m2" style="display:flex;align-items:baseline;gap:14px"><span class="serif" style="font-size:66px;color:#FF9A55">2</span><span style="font-size:24px;font-weight:600;color:#FBF3E6">of 150 everyday commands held by mistake</span></div>
+    <div style="display:flex;align-items:baseline;gap:14px"><span class="serif" style="font-size:66px;color:#FF9A55">0</span><span style="font-size:24px;font-weight:600;color:#FBF3E6">model calls added by a park</span></div></div>
 </div>
 
 <!-- ================= S7 STACK ================= -->
@@ -202,9 +217,9 @@ svg{display:block;overflow:visible}
 <!-- ================= S8 OUTRO ================= -->
 <div class="scene" id="s8">
   <svg class="abs" data-in="0.5" data-s="0.7" style="left:870px;top:130px" width="180" height="228" viewBox="0 0 60 76"><use href="#hg"/><rect id="sandfall2" x="29.2" y="40" width="1.6" height="26" fill="#F26A1B"/></svg>
-  <div class="abs serif" data-in="0.9" data-dy="40" style="left:0;width:1920px;top:370px;text-align:center;font-size:210px;line-height:1;letter-spacing:-3px">Abeyance</div>
-  <div class="abs serif" data-in="1.7" data-dy="30" style="left:0;width:1920px;top:610px;text-align:center;font-size:84px;line-height:1.1;font-style:italic;color:var(--orange)">Night runs without blind trust.</div>
-  <div class="abs card" data-in="2.6" data-dy="30" style="left:260px;top:745px;width:1400px;height:92px;display:flex;align-items:center;justify-content:center;gap:26px;border:3px solid var(--orange);white-space:nowrap"><span class="lab">install</span><span class="mono" style="font-size:34px;font-weight:700">hermes plugins install 0xkinno/abeyance#abeyance</span></div>
+  <div class="abs serif" data-in="0.9" data-dy="40" style="left:0;width:1920px;top:372px;text-align:center;font-size:190px;line-height:1;letter-spacing:-3px;font-weight:500">Abeyance</div>
+  <div class="abs serif" data-in="1.7" data-dy="30" style="left:0;width:1920px;top:596px;text-align:center;font-size:76px;line-height:1.1;font-style:italic;font-weight:500;color:var(--orange)">Night runs without blind trust.</div>
+  <div class="abs card dark" data-in="2.6" data-dy="30" style="left:260px;top:745px;width:1400px;height:92px;display:flex;align-items:center;justify-content:center;gap:26px;white-space:nowrap"><span class="lab">install</span><span class="mono" style="font-size:34px;font-weight:700">hermes plugins install 0xkinno/abeyance#abeyance</span></div>
   <div class="abs" data-in="3.2" data-dy="20" style="left:0;width:1920px;top:860px;display:flex;justify-content:center;gap:18px"><span class="chip p">try it: /abeyance demo</span><span class="chip p">github.com/0xkinno/abeyance</span><span class="chip o">Hermes Agent Plugin Hackathon</span></div>
   <svg class="abs" data-in="1.0" data-dx="-60" style="left:200px;top:360px" width="150" height="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#FFF3E2" stroke="#F26A1B" stroke-width="4"/><path d="M50 22v30l20 12" stroke="#1E1A16" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
   <svg class="abs" data-in="1.2" data-dx="60" style="left:1570px;top:360px" width="150" height="150" viewBox="0 0 100 100"><path d="M50 8l36 14v26c0 22-16 38-36 44C30 86 14 70 14 48V22z" fill="#FFF3E2" stroke="#F26A1B" stroke-width="4"/><path d="M34 50l11 11 22-24" stroke="#2E9E6B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -217,7 +232,8 @@ svg{display:block;overflow:visible}
 
 <script>
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
-const E={out:t=>1-Math.pow(1-t,3),inout:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,back:t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)}};
+const CHAP={s1:'I  ·  THE NAME',s2:'II  ·  THE MOMENT',s3:'III  ·  THE HOLD',s4:'IV  ·  THE YES',s5:'V  ·  THE CHECK',s6:'VI  ·  THE BREAK CAMPAIGN',s7:'VII  ·  THE MECHANISM',s8:'VIII  ·  ABEYANCE'};
+const E={soft:t=>{const c1=1.15,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},out:t=>1-Math.pow(1-t,3),inout:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,back:t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)}};
 const pr=(t,a,b,e=E.out)=>e(clamp((t-a)/(b-a)));
 let S=null;
 
@@ -226,17 +242,18 @@ document.getElementById('s1title').innerHTML=[...'Abeyance'].map((c,i)=>`<span d
 (function(){const g=document.getElementById('ticks');let h='';for(let i=0;i<60;i++){const a=i*6*Math.PI/180,r1=i%5?80:72,r2=88;h+=`<line x1="${100+Math.sin(a)*r1}" y1="${100-Math.cos(a)*r1}" x2="${100+Math.sin(a)*r2}" y2="${100-Math.cos(a)*r2}" stroke="${i%5?'#D9C5A6':'#1E1A16'}" stroke-width="${i%5?1.5:3}"/>`}g.innerHTML=h})();
 
 const tilesData=[
- ['stranger','resume PTWJ','sent by id 7, not the owner','Only the job\'s owner can resume it.','REFUSED','M12 12a4 4 0 100-8 4 4 0 000 8zM4 21c0-4 3.6-7 8-7s8 3 8 7'],
- ['replay','resume, then resume again','two chats at the same moment','One winner. The other finds nothing parked.','REFUSED','M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5M18 3v4h-4M6 21v-4h4'],
- ['disguise','bash -c "git push"','also sudo env, $( ), xargs, eval','Unwrapped, classified PUSH, held.','HELD','M4 8l8-5 8 5v8l-8 5-8-5zM4 8l8 5 8-5M12 13v8'],
- ['subagent','delegate_task runs git push','a child session of the cron run','The child session is bound. Held.','HELD','M12 5a2 2 0 100-4 2 2 0 000 4zM5 21a2 2 0 100-4 2 2 0 000 4zM19 21a2 2 0 100-4 2 2 0 000 4zM12 5v6M12 11L5 17M12 11l7 6'],
- ['changed command','npm publish --tag next','after resume, a different call than approved','Run exactly the approved call first.','BLOCKED','M5 5h14v14H5zM9 9l6 6M15 9l-6 6'],
- ['expired','resume after 18 hours','the park has passed its expiry','Expired. Nothing runs.','REFUSED','M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3 2']];
+ ['stranger','resume PTWJ','sent by id 7, not the owner','Only the job\'s owner can resume it.','REFUSED','M12 12a4 4 0 100-8 4 4 0 000 8zM4 21c0-4 3.6-7 8-7s8 3 8 7','id 7 is not in owners'],
+ ['replay','resume, then resume again','two chats at the same moment','One winner. The other finds nothing parked.','REFUSED','M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5M18 3v4h-4M6 21v-4h4','compare-and-set, one winner'],
+ ['disguise','bash -c "git push"','also sudo env, $( ), xargs, eval','Unwrapped, classified PUSH, held.','HELD','M4 8l8-5 8 5v8l-8 5-8-5zM4 8l8 5 8-5M12 13v8','policy.py reads inside the wrapper'],
+ ['subagent','delegate_task runs git push','a child session of the cron run','The child session is bound. Held.','HELD','M12 5a2 2 0 100-4 2 2 0 000 4zM5 21a2 2 0 100-4 2 2 0 000 4zM19 21a2 2 0 100-4 2 2 0 000 4zM12 5v6M12 11L5 17M12 11l7 6','bound at subagent_start'],
+ ['changed command','npm publish --tag next','after resume, a different call than approved','Run exactly the approved call first.','BLOCKED','M5 5h14v14H5zM9 9l6 6M15 9l-6 6','the call digest does not match'],
+ ['expired','resume after 18 hours','the park has passed its expiry','Expired. Nothing runs.','REFUSED','M12 3a9 9 0 100 18 9 9 0 000-18zM12 7v5l3 2','expires_at has passed']];
 (function(){let h='';tilesData.forEach((d,i)=>{const col=i%3,row=Math.floor(i/3);const x=110+col*580,y=140+row*325;const t0=0.8+i*0.8;
  h+=`<div class="card abs" data-in="${t0}" data-dy="40" data-s="0.94" style="left:${x}px;top:${y}px;width:540px;height:300px;padding:26px 30px">
  <div style="display:flex;align-items:center;gap:14px"><svg width="40" height="40" viewBox="0 0 24 24"><path d="${d[5]}" fill="none" stroke="#F26A1B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lab" style="font-size:20px;color:#1E1A16">${d[0]}</span></div>
  <div class="mono" style="font-size:25px;font-weight:700;margin-top:22px">${d[1]}</div><div style="font-size:21px;color:var(--muted);margin-top:6px">${d[2]}</div>
  <div style="margin-top:22px;font-size:26px;font-weight:600;line-height:1.2">${d[3]}</div>
+ <div class="abs mono" style="left:30px;bottom:26px;font-size:18px;color:#9A7B5B;display:flex;align-items:center;gap:10px"><span style="width:9px;height:9px;border-radius:50%;background:#F26A1B;display:inline-block"></span>${d[6]}</div>
  <span class="chip o abs" data-in="${t0+0.55}" data-s="0.6" style="right:26px;top:24px;font-size:19px;padding:7px 18px">${d[4]}</span></div>`});
  document.getElementById('tiles').innerHTML=h})();
 
@@ -251,10 +268,11 @@ const hooksData=[['pre_tool_call','holds the step before it runs'],['post_tool_c
 function applyScene(el,t){
   el.querySelectorAll('[data-in]').forEach(n=>{
     const a=parseFloat(n.dataset.in),d=parseFloat(n.dataset.d||.6),dx=parseFloat(n.dataset.dx||0),dy=parseFloat(n.dataset.dy||0),s=parseFloat(n.dataset.s||1);
-    const p=pr(t,a,a+d,E.out);
-    n.style.opacity=p;
-    n.style.transform=`translate(${(1-p)*dx}px,${(1-p)*dy}px) scale(${s+(1-s)*p})`;
-    n.style.visibility=p<=0?'hidden':'visible';
+    const p=pr(t,a,a+d,E.soft), q=clamp(p), fl=n.classList.contains('phone')?Math.sin(t*1.3+a)*7:0;
+    const ot=n.dataset.out?parseFloat(n.dataset.out):null;const qo=ot===null?1:1-pr(t,ot,ot+0.3,E.out);
+    n.style.opacity=q*qo;
+    n.style.transform=`translate(${(1-p)*dx}px,${(1-p)*dy+fl*q}px) scale(${s+(1-s)*p})`;
+    n.style.visibility=(q<=0||qo<=0)?'hidden':'visible';
   });
   el.querySelectorAll('[data-draw]').forEach(n=>{
     const [a,d]=n.dataset.draw.split(',').map(parseFloat);const p=pr(t,a,a+d,E.inout);
@@ -292,18 +310,19 @@ function setCaption(s,t){
   const parts=s.text.match(/[^.]+\.?/g).map(x=>x.trim()).filter(Boolean);
   const total=parts.reduce((a,p)=>a+p.length,0);let acc=T0,cur='';
   for(const p of parts){const dur=(T1-T0)*p.length/total;if(t>=acc&&t<acc+dur){cur=p}acc+=dur}
-  $('cap').textContent=cur;$('cap').style.opacity=cur?1:0;
+  $('cap').innerHTML=cur?'<span id="capin">'+cur+'</span>':'';
 }
 
 window.seek=function(T){
   if(!S)return;
   let idx=S.scenes.findIndex(s=>T>=s.start&&T<s.start+s.dur);if(idx<0)idx=S.scenes.length-1;
-  S.scenes.forEach((s,i)=>{const el=$(s.id);const on=i===idx;el.style.opacity=on?1:0;el.style.visibility=on?'visible':'hidden';if(on){const t=T-s.start;applyScene(el,t);sceneExtras(s.id,t);setCaption(s,t)}});
+  S.scenes.forEach((s,i)=>{const el=$(s.id);const on=i===idx;el.style.opacity=on?1:0;el.style.visibility=on?'visible':'hidden';if(on){const t=T-s.start;el.style.transform=`scale(${1+0.018*clamp(t/s.dur)})`;applyScene(el,t);sceneExtras(s.id,t);setCaption(s,t);$('chap').textContent=CHAP[s.id]||''}});
   // wipe at boundaries
   let wx=-1920;
   S.scenes.forEach((s,i)=>{if(i===0)return;const b=s.start;if(T>=b-0.4&&T<b)wx=-1920+1920*pr(T,b-0.4,b,E.inout);else if(T>=b&&T<b+0.4)wx=1920*pr(T,b,b+0.4,E.inout)});
   $('wipe').style.transform=`translateX(${wx}px)`;
   $('prog').style.width=(1920*T/S.total)+'px';
+  document.documentElement.style.setProperty('--sx',((T*38)%260-60)+'%');
   const bb=Math.sin(T*0.35);$('b1').style.transform=`translate(${bb*60}px,${bb*40}px)`;$('b2').style.transform=`translate(${-bb*50}px,${-bb*30}px)`;
 };
 fetch('build/scenes.json').then(r=>r.json()).then(j=>{S=j;document.fonts.ready.then(()=>{window.READY=true;seek(0)})});
