@@ -1,180 +1,6 @@
 {
- "world": [
-  {
-   "command": "git push origin main",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "git push --force origin main",
-   "dangerous": true,
-   "pattern": "git force push (rewrites remote history)",
-   "hardline": false
-  },
-  {
-   "command": "git push --force-with-lease",
-   "dangerous": true,
-   "pattern": "git force push (rewrites remote history)",
-   "hardline": false
-  },
-  {
-   "command": "gh pr merge 42 --squash --delete-branch",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "gh release create v1.2.0 --notes x",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "npm publish",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "twine upload dist/*",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "cargo publish",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "docker push ghcr.io/acme/app:latest",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "terraform apply -auto-approve",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "kubectl apply -f deploy.yaml",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "kubectl delete deployment web",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "helm upgrade --install web ./chart",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "vercel --prod",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "fly deploy",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "ssh prod 'systemctl restart app'",
-   "dangerous": true,
-   "pattern": "stop/restart system service",
-   "hardline": false
-  },
-  {
-   "command": "curl -X POST https://api.stripe.com/v1/invoices/in_1/send -u $STRIPE_KEY:",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "curl -X DELETE https://api.github.com/repos/acme/app",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "aws s3 rm s3://acme-backups --recursive",
-   "dangerous": true,
-   "pattern": "recursive delete (flags after operands)",
-   "hardline": false
-  },
-  {
-   "command": "gcloud run deploy web --source .",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "psql $DATABASE_URL -c 'DROP TABLE users'",
-   "dangerous": true,
-   "pattern": "SQL DROP",
-   "hardline": false
-  },
-  {
-   "command": "psql $DATABASE_URL -c 'DELETE FROM invoices'",
-   "dangerous": true,
-   "pattern": "SQL DELETE without WHERE",
-   "hardline": false
-  },
-  {
-   "command": "mysql -e 'TRUNCATE orders'",
-   "dangerous": true,
-   "pattern": "SQL TRUNCATE",
-   "hardline": false
-  },
-  {
-   "command": "gh issue close 12",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "git tag -d v1 && git push origin :refs/tags/v1",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "sendmail client@example.com < invoice.txt",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "git reset --hard origin/main && git push -f",
-   "dangerous": true,
-   "pattern": "git reset --hard (destroys uncommitted changes)",
-   "hardline": false
-  },
-  {
-   "command": "aws ec2 terminate-instances --instance-ids i-123",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  },
-  {
-   "command": "stripe refunds create --charge ch_1",
-   "dangerous": false,
-   "pattern": null,
-   "hardline": false
-  }
- ],
+ "hermes_commit": "3d4dd108cf52e26cf0d7fb218461e53623a8ec2d",
+ "generated": "2026-11-10",
  "machine": [
   {
    "command": "rm -rf /",
@@ -212,5 +38,1275 @@
    "pattern": "format filesystem",
    "hardline": true
   }
- ]
+ ],
+ "world": [
+  {
+   "command": "git push origin main",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git push --force origin main",
+   "dangerous": true,
+   "pattern": "git force push (rewrites remote history)",
+   "hardline": false
+  },
+  {
+   "command": "git push --force-with-lease",
+   "dangerous": true,
+   "pattern": "git force push (rewrites remote history)",
+   "hardline": false
+  },
+  {
+   "command": "git push origin --tags",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git push origin :refs/tags/v1.0.0",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git push -u origin feature/invoices",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr merge 42 --squash --delete-branch",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr merge --auto --merge",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh release create v1.4.3 --notes \"patch\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh issue close 12",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh issue comment 12 --body \"fixed in 1.4.3\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh repo delete acme/old-site --yes",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "glab mr merge 7",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm publish",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm publish --access public",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "yarn npm publish",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pnpm publish --no-git-checks",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "twine upload dist/*",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cargo publish",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gem push ledgerly-1.4.3.gem",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker push ghcr.io/acme/app:latest",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "helm push chart.tgz oci://registry.acme.io/charts",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform apply -auto-approve",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform destroy -auto-approve",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl apply -f deploy.yaml",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl delete deployment web",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl rollout restart deployment/web",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "helm upgrade --install web ./chart",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "vercel --prod",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "fly deploy",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "netlify deploy --prod",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gcloud run deploy web --source .",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "heroku releases:rollback v41",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "ssh prod 'systemctl restart app'",
+   "dangerous": true,
+   "pattern": "stop/restart system service",
+   "hardline": false
+  },
+  {
+   "command": "rsync -az dist/ deploy@web1:/srv/app",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "aws s3 rm s3://acme-backups --recursive",
+   "dangerous": true,
+   "pattern": "recursive delete (flags after operands)",
+   "hardline": false
+  },
+  {
+   "command": "aws s3 sync ./site s3://acme-site --delete",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "aws ec2 terminate-instances --instance-ids i-0abc123",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "aws lambda update-function-code --function-name api --zip-file fileb://api.zip",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gcloud compute instances delete web-1 --quiet",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "az group delete --name acme-rg --yes",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "stripe refunds create --charge ch_1",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -X POST https://api.stripe.com/v1/payouts -u sk_live_x: -d amount=5000",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -X DELETE https://api.github.com/repos/acme/app",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -X POST https://hooks.slack.com/services/T0/B0/xyz -d '{\"text\":\"deployed\"}'",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -X PUT https://api.cloudflare.com/client/v4/zones/z1/dns_records/r1 -d @record.json",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl --data @payload.json https://api.acme.io/v1/orders",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "http POST https://api.acme.io/v1/invoices amount=120",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "psql $DATABASE_URL -c 'DROP TABLE users'",
+   "dangerous": true,
+   "pattern": "SQL DROP",
+   "hardline": false
+  },
+  {
+   "command": "psql $DATABASE_URL -c 'DELETE FROM invoices'",
+   "dangerous": true,
+   "pattern": "SQL DELETE without WHERE",
+   "hardline": false
+  },
+  {
+   "command": "mysql -e 'TRUNCATE orders'",
+   "dangerous": true,
+   "pattern": "SQL TRUNCATE",
+   "hardline": false
+  },
+  {
+   "command": "mongosh $MONGO_URL --eval 'db.users.deleteMany({})'",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "redis-cli -u $REDIS_URL FLUSHALL",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "sendmail client@example.com < invoice.txt",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "mail -s \"Invoice 1043\" client@example.com < invoice.txt",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git reset --hard origin/main && git push -f",
+   "dangerous": true,
+   "pattern": "git reset --hard (destroys uncommitted changes)",
+   "hardline": false
+  },
+  {
+   "command": "bash -c \"npm publish\"",
+   "dangerous": true,
+   "pattern": "shell command via -c/-lc flag",
+   "hardline": false
+  },
+  {
+   "command": "sudo env NODE_ENV=production npm publish",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "timeout 60 git push origin main",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "echo v1.4.3 | xargs gh release create",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  }
+ ],
+ "everyday": [
+  {
+   "command": "git status",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git status -sb",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git log --oneline -20",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git log -p -- src/invoice.ts",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git diff",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git diff --staged",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git diff main...feature/invoices",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git show HEAD",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git show HEAD~2:package.json",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git branch -a",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git branch feature/pdf-export",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git checkout -b fix/rounding",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git switch main",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git add src/invoice.ts",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git add -A",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git commit -m \"Fix rounding in invoice totals\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git commit --amend --no-edit",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git stash",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git stash pop",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git fetch origin",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git pull --rebase origin main",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git merge --no-ff feature/pdf-export",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git rebase main",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git tag v1.4.3",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git blame src/invoice.ts",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git rev-parse HEAD",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git remote -v",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git clean -n",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git grep \"TODO\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git cherry-pick a1b2c3d",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git restore src/invoice.ts",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "git worktree list",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr view 42",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr list --state open",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr diff 42",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr checks 42",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh pr create --draft --title \"Fix rounding\" --body \"WIP\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh issue list --label bug",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh issue view 12",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh run list --limit 5",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh run view 123456 --log-failed",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh release list",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gh api repos/acme/app/pulls",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm install",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm ci",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm test",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm run build",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm run lint",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm run dev",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm outdated",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm audit",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm version patch",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm pack",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm ls --depth 0",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npm view react version",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npx prettier --check .",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npx tsc --noEmit",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npx eslint src",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "npx vitest run",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "yarn install",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "yarn test",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pnpm install --frozen-lockfile",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pnpm build",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "node scripts/seed.js",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pip install -r requirements.txt",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pip install -e .",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pip list --outdated",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "pip freeze",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python -m pytest -q",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python -m pytest tests/test_invoice.py -k rounding",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python manage.py migrate --plan",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python manage.py runserver",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python -m venv .venv",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python scripts/report.py --dry-run",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "python -m build",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "ruff check .",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "black --check .",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "mypy src",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "uv sync",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "uv run pytest",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "poetry install",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cargo build --release",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cargo test",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cargo clippy",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cargo fmt --check",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "go build ./...",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "go test ./...",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "go mod tidy",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "make",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "make test",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "make build",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker build -t ledgerly:dev .",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker run --rm -p 3000:3000 ledgerly:dev",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker ps",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker logs web",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker compose up -d",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "docker compose down",
+   "dangerous": true,
+   "pattern": "docker compose restart/stop/kill/down (container lifecycle)",
+   "hardline": false
+  },
+  {
+   "command": "docker images",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform init",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform plan",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform fmt -check",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform validate",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "terraform show",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl get pods",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl describe pod web-7f9c",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl logs deployment/web --tail 100",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "kubectl get svc -n prod",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "helm template web ./chart",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "helm lint ./chart",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "aws s3 ls s3://acme-backups",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "aws sts get-caller-identity",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "aws ec2 describe-instances --filters Name=tag:env,Values=prod",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "gcloud config list",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl https://api.github.com/repos/acme/app",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -s https://registry.npmjs.org/ledgerly | jq .version",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -I https://ledgerly.app",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -X GET https://api.acme.io/v1/health",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -s http://localhost:3000/api/invoices",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "curl -X POST http://localhost:3000/api/invoices -d @fixture.json",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "wget -q https://example.com/data.csv -O data.csv",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "psql $DATABASE_URL -c 'SELECT count(*) FROM invoices'",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "sqlite3 dev.db '.tables'",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "redis-cli -u $REDIS_URL GET session:42",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "ls -la",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "ls dist",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cat package.json",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "head -50 CHANGELOG.md",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "tail -f logs/app.log",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "grep -rn \"calculateTotal\" src",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "rg \"TODO\" src",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "find . -name \"*.test.ts\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "sed -i 's/1.4.2/1.4.3/' README.md",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "awk -F, '{print $2}' data.csv",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "wc -l src/*.ts",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "jq '.version' package.json",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "mkdir -p build/reports",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "cp .env.example .env.local",
+   "dangerous": true,
+   "pattern": "overwrite project env/config file",
+   "hardline": false
+  },
+  {
+   "command": "mv notes.txt docs/notes.txt",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "rm notes.txt",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "rm -rf node_modules",
+   "dangerous": true,
+   "pattern": "recursive delete",
+   "hardline": false
+  },
+  {
+   "command": "rm -rf dist",
+   "dangerous": true,
+   "pattern": "recursive delete",
+   "hardline": false
+  },
+  {
+   "command": "chmod +x scripts/release.sh",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "tar -czf backup.tgz src",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "unzip assets.zip -d assets",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "echo \"build ok\"",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "env | grep NODE",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "ps aux | grep node",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "du -sh node_modules",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "vercel dev",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  },
+  {
+   "command": "fly status",
+   "dangerous": false,
+   "pattern": null,
+   "hardline": false
+  }
+ ],
+ "machine_flagged": 6,
+ "machine_total": 6,
+ "world_flagged": 9,
+ "world_total": 60,
+ "everyday_flagged": 4,
+ "everyday_total": 150
 }
