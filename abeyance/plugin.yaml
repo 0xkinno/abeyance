@@ -1,0 +1,24 @@
+name: abeyance
+version: 0.1.0
+description: "A Hermes cron run that waits for you at the one step it should not take alone, then finishes from that step when you say yes."
+author: 0xkinno
+license: MIT
+homepage: https://github.com/0xkinno/abeyance
+manifest_version: 2
+api_version: 1
+requires_hermes: ">=0.23.0"   # confirm against the probed release in Phase 0 (rule 14)
+tags: [cron, approvals, automation, human-in-the-loop]
+provides_tools: []
+provides_hooks:
+  - pre_tool_call
+  - post_tool_call
+  - transform_llm_output
+  - pre_llm_call
+  - subagent_start
+config_schema:
+  owners: {type: list, default: [], label: "Owners", description: "Platform user ids allowed to resume or drop a waiting step from a chat app (Telegram, Discord, Slack). Local CLI and Desktop are always the owner."}
+  expiry_hours: {type: float, default: 18, label: "Expiry (hours)", description: "A waiting step that is not answered in time expires. Nothing runs."}
+  interactive: {type: str, choices: [ask, off], default: ask, label: "Live sessions", description: "ask: in a live chat, held steps go to Hermes's own approval card. off: Abeyance only acts in cron runs."}
+  hold: {type: list, default: [], label: "Extra hold rules", description: "Glob patterns on a command or tool name to hold as well, e.g. 'make release*' or 'mcp__linear__*'."}
+  allow: {type: list, default: [], label: "Allow rules", description: "Glob patterns to stop holding (never applies to local destruction)."}
+  workdir: {type: str, default: "", label: "Job folder", description: "Writes outside this folder are held. Empty: not checked."}
