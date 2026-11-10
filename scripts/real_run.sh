@@ -32,7 +32,10 @@ night)
   [ -d "$DEMO" ] || GH_TOKEN="$DEMO_GH_TOKEN" gh repo clone 0xkinno/abeyance-demo "$DEMO"
   git -C "$DEMO" config user.name 0xkinno
   git -C "$DEMO" config user.email "${DEMO_EMAIL:-0xkinno@users.noreply.github.com}"
-  git -C "$DEMO" config credential.helper '!f() { echo username=x-access-token; echo "password=$DEMO_GH_TOKEN"; }; f'
+  # The job runs inside the gateway, which does not have DEMO_GH_TOKEN in its environment, and the
+  # Codespace's own helper only covers this repo. Clear the chain and bake the token in at config time.
+  git -C "$DEMO" config --replace-all credential.helper ''
+  git -C "$DEMO" config --add credential.helper "!f() { echo username=x-access-token; echo password=$DEMO_GH_TOKEN; }; f"
   hermes cron create "1d" "In this repo: run npm test. If it passes, bump the patch version with npm version patch, then run git push origin main --follow-tags, then gh release create v\$(node -p \"require('./package.json').version\") --generate-notes. Report what you did." \
     --name "Nightly release (demo)" --deliver telegram --workdir "$DEMO" | tee /tmp/abeyance-cron.txt
   id=$(grep -o 'Created job: [^ ]*' /tmp/abeyance-cron.txt | awk '{print $3}')
