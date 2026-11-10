@@ -160,11 +160,12 @@ def _classify_argv(argv: list[str], cfg: PolicyConfig) -> list[tuple[str, str]]:
             hit("MERGE", f"{cmd} {sub} {args[1]}")
         elif sub == "release" and len(args) > 1 and args[1] in {"create", "upload", "delete", "edit"}:
             hit("PUBLISH", f"{cmd} release {args[1]}")
-        elif sub in {"issue", "repo"} and len(args) > 1 and args[1] in {"close", "delete", "create", "edit", "archive", "transfer"}:
+        elif sub in {"issue", "repo", "pr", "mr"} and len(args) > 1 and args[1] in {"close", "delete", "create", "edit", "archive", "transfer", "comment", "reopen", "lock"} \
+                and not (args[1] == "create" and "--draft" in args):
             hit("HTTP_WRITE", f"{cmd} {sub} {args[1]}")
         elif sub == "api" and any(a in {"-x", "--method"} for a in args) and re.search(r"(?i)(-X|--method)\s*(POST|PUT|PATCH|DELETE)", joined):
             hit("HTTP_WRITE", "gh api write")
-    elif cmd in {"npm", "pnpm", "yarn", "bun"} and sub == "publish":
+    elif cmd in {"npm", "pnpm", "yarn", "bun"} and (sub == "publish" or sub == "npm" and len(args) > 1 and args[1] == "publish"):
         hit("PUBLISH", f"{cmd} publish")
     elif cmd in {"twine"} and sub == "upload" or cmd in {"cargo", "poetry", "uv", "hatch", "flit"} and sub == "publish" or cmd == "gem" and sub == "push":
         hit("PUBLISH", f"{cmd} {sub}")
@@ -182,6 +183,10 @@ def _classify_argv(argv: list[str], cfg: PolicyConfig) -> list[tuple[str, str]]:
         hit("DEPLOY", f"{cmd} {sub}")
     elif cmd == "helm" and sub in {"install", "upgrade", "uninstall", "delete", "rollback"}:
         hit("DEPLOY", f"helm {sub}")
+    elif cmd == "helm" and sub == "push":
+        hit("PUBLISH", "helm push")
+    elif cmd == "heroku" and re.match(r"(releases:rollback|ps:(scale|restart|stop|kill)|apps:destroy|config:(set|unset)|pg:reset|maintenance:on|addons:destroy|run)", sub):
+        hit("DEPLOY", f"heroku {sub}")
     elif cmd in {"terraform", "tofu"} and sub in {"apply", "destroy", "import", "taint"}:
         hit("CLOUD_DELETE" if sub == "destroy" else "DEPLOY", f"{cmd} {sub}")
     elif cmd == "pulumi" and sub in {"up", "destroy", "update"} or cmd == "cdk" and sub in {"deploy", "destroy"}:

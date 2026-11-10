@@ -1,0 +1,1755 @@
+{
+ "world_total": 60,
+ "world_held": 60,
+ "world_missed": [],
+ "everyday_total": 150,
+ "everyday_false_holds": 2,
+ "everyday_held": [
+  {
+   "line": 140,
+   "command": "rm -rf node_modules",
+   "held": true,
+   "classes": [
+    "DESTROY_LOCAL"
+   ],
+   "reasons": [
+    "rm -r or -f"
+   ]
+  },
+  {
+   "line": 141,
+   "command": "rm -rf dist",
+   "held": true,
+   "classes": [
+    "DESTROY_LOCAL"
+   ],
+   "reasons": [
+    "rm -r or -f"
+   ]
+  }
+ ],
+ "world": [
+  {
+   "line": 1,
+   "command": "git push origin main",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 2,
+   "command": "git push --force origin main",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 3,
+   "command": "git push --force-with-lease",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 4,
+   "command": "git push origin --tags",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 5,
+   "command": "git push origin :refs/tags/v1.0.0",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 6,
+   "command": "git push -u origin feature/invoices",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 7,
+   "command": "gh pr merge 42 --squash --delete-branch",
+   "held": true,
+   "classes": [
+    "MERGE"
+   ],
+   "reasons": [
+    "gh pr merge"
+   ]
+  },
+  {
+   "line": 8,
+   "command": "gh pr merge --auto --merge",
+   "held": true,
+   "classes": [
+    "MERGE"
+   ],
+   "reasons": [
+    "gh pr merge"
+   ]
+  },
+  {
+   "line": 9,
+   "command": "gh release create v1.4.3 --notes \"patch\"",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "gh release create"
+   ]
+  },
+  {
+   "line": 10,
+   "command": "gh issue close 12",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "gh issue close"
+   ]
+  },
+  {
+   "line": 11,
+   "command": "gh issue comment 12 --body \"fixed in 1.4.3\"",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "gh issue comment"
+   ]
+  },
+  {
+   "line": 12,
+   "command": "gh repo delete acme/old-site --yes",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "gh repo delete"
+   ]
+  },
+  {
+   "line": 13,
+   "command": "glab mr merge 7",
+   "held": true,
+   "classes": [
+    "MERGE"
+   ],
+   "reasons": [
+    "glab mr merge"
+   ]
+  },
+  {
+   "line": 14,
+   "command": "npm publish",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "npm publish"
+   ]
+  },
+  {
+   "line": 15,
+   "command": "npm publish --access public",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "npm publish"
+   ]
+  },
+  {
+   "line": 16,
+   "command": "yarn npm publish",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "yarn publish"
+   ]
+  },
+  {
+   "line": 17,
+   "command": "pnpm publish --no-git-checks",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "pnpm publish"
+   ]
+  },
+  {
+   "line": 18,
+   "command": "twine upload dist/*",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "twine upload"
+   ]
+  },
+  {
+   "line": 19,
+   "command": "cargo publish",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "cargo publish"
+   ]
+  },
+  {
+   "line": 20,
+   "command": "gem push ledgerly-1.4.3.gem",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "gem push"
+   ]
+  },
+  {
+   "line": 21,
+   "command": "docker push ghcr.io/acme/app:latest",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "docker push"
+   ]
+  },
+  {
+   "line": 22,
+   "command": "helm push chart.tgz oci://registry.acme.io/charts",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "helm push"
+   ]
+  },
+  {
+   "line": 23,
+   "command": "terraform apply -auto-approve",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "terraform apply"
+   ]
+  },
+  {
+   "line": 24,
+   "command": "terraform destroy -auto-approve",
+   "held": true,
+   "classes": [
+    "CLOUD_DELETE"
+   ],
+   "reasons": [
+    "terraform destroy"
+   ]
+  },
+  {
+   "line": 25,
+   "command": "kubectl apply -f deploy.yaml",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "kubectl apply"
+   ]
+  },
+  {
+   "line": 26,
+   "command": "kubectl delete deployment web",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "kubectl delete"
+   ]
+  },
+  {
+   "line": 27,
+   "command": "kubectl rollout restart deployment/web",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "kubectl rollout"
+   ]
+  },
+  {
+   "line": 28,
+   "command": "helm upgrade --install web ./chart",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "helm upgrade"
+   ]
+  },
+  {
+   "line": 29,
+   "command": "vercel --prod",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "vercel production"
+   ]
+  },
+  {
+   "line": 30,
+   "command": "fly deploy",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "fly deploy"
+   ]
+  },
+  {
+   "line": 31,
+   "command": "netlify deploy --prod",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "netlify production"
+   ]
+  },
+  {
+   "line": 32,
+   "command": "gcloud run deploy web --source .",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "gcloud change"
+   ]
+  },
+  {
+   "line": 33,
+   "command": "heroku releases:rollback v41",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "heroku releases:rollback"
+   ]
+  },
+  {
+   "line": 34,
+   "command": "ssh prod 'systemctl restart app'",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "remote command over ssh"
+   ]
+  },
+  {
+   "line": 35,
+   "command": "rsync -az dist/ deploy@web1:/srv/app",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "rsync to a remote host"
+   ]
+  },
+  {
+   "line": 36,
+   "command": "aws s3 rm s3://acme-backups --recursive",
+   "held": true,
+   "classes": [
+    "CLOUD_DELETE"
+   ],
+   "reasons": [
+    "aws delete or terminate"
+   ]
+  },
+  {
+   "line": 37,
+   "command": "aws s3 sync ./site s3://acme-site --delete",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "aws change"
+   ]
+  },
+  {
+   "line": 38,
+   "command": "aws ec2 terminate-instances --instance-ids i-0abc123",
+   "held": true,
+   "classes": [
+    "CLOUD_DELETE"
+   ],
+   "reasons": [
+    "aws delete or terminate"
+   ]
+  },
+  {
+   "line": 39,
+   "command": "aws lambda update-function-code --function-name api --zip-file fileb://api.zip",
+   "held": true,
+   "classes": [
+    "DEPLOY"
+   ],
+   "reasons": [
+    "aws change"
+   ]
+  },
+  {
+   "line": 40,
+   "command": "gcloud compute instances delete web-1 --quiet",
+   "held": true,
+   "classes": [
+    "CLOUD_DELETE"
+   ],
+   "reasons": [
+    "gcloud delete or terminate"
+   ]
+  },
+  {
+   "line": 41,
+   "command": "az group delete --name acme-rg --yes",
+   "held": true,
+   "classes": [
+    "CLOUD_DELETE"
+   ],
+   "reasons": [
+    "az delete or terminate"
+   ]
+  },
+  {
+   "line": 42,
+   "command": "stripe refunds create --charge ch_1",
+   "held": true,
+   "classes": [
+    "MONEY"
+   ],
+   "reasons": [
+    "stripe refunds create"
+   ]
+  },
+  {
+   "line": 43,
+   "command": "curl -X POST https://api.stripe.com/v1/payouts -u sk_live_x: -d amount=5000",
+   "held": true,
+   "classes": [
+    "MONEY"
+   ],
+   "reasons": [
+    "curl write to https://api.stripe.com/v1/payouts"
+   ]
+  },
+  {
+   "line": 44,
+   "command": "curl -X DELETE https://api.github.com/repos/acme/app",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "curl write to https://api.github.com/repos/acme/app"
+   ]
+  },
+  {
+   "line": 45,
+   "command": "curl -X POST https://hooks.slack.com/services/T0/B0/xyz -d '{\"text\":\"deployed\"}'",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "curl write to https://hooks.slack.com/services/T0/B0/xyz"
+   ]
+  },
+  {
+   "line": 46,
+   "command": "curl -X PUT https://api.cloudflare.com/client/v4/zones/z1/dns_records/r1 -d @record.json",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "curl write to https://api.cloudflare.com/client/v4/zones/z1/dns_records/r1"
+   ]
+  },
+  {
+   "line": 47,
+   "command": "curl --data @payload.json https://api.acme.io/v1/orders",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "curl write to https://api.acme.io/v1/orders"
+   ]
+  },
+  {
+   "line": 48,
+   "command": "http POST https://api.acme.io/v1/invoices amount=120",
+   "held": true,
+   "classes": [
+    "HTTP_WRITE"
+   ],
+   "reasons": [
+    "http write to https://api.acme.io/v1/invoices"
+   ]
+  },
+  {
+   "line": 49,
+   "command": "psql $DATABASE_URL -c 'DROP TABLE users'",
+   "held": true,
+   "classes": [
+    "DB_WRITE"
+   ],
+   "reasons": [
+    "psql write statement"
+   ]
+  },
+  {
+   "line": 50,
+   "command": "psql $DATABASE_URL -c 'DELETE FROM invoices'",
+   "held": true,
+   "classes": [
+    "DB_WRITE"
+   ],
+   "reasons": [
+    "psql write statement"
+   ]
+  },
+  {
+   "line": 51,
+   "command": "mysql -e 'TRUNCATE orders'",
+   "held": true,
+   "classes": [
+    "DB_WRITE"
+   ],
+   "reasons": [
+    "mysql write statement"
+   ]
+  },
+  {
+   "line": 52,
+   "command": "mongosh $MONGO_URL --eval 'db.users.deleteMany({})'",
+   "held": true,
+   "classes": [
+    "DB_WRITE"
+   ],
+   "reasons": [
+    "mongosh write statement"
+   ]
+  },
+  {
+   "line": 53,
+   "command": "redis-cli -u $REDIS_URL FLUSHALL",
+   "held": true,
+   "classes": [
+    "DB_WRITE"
+   ],
+   "reasons": [
+    "redis write"
+   ]
+  },
+  {
+   "line": 54,
+   "command": "sendmail client@example.com < invoice.txt",
+   "held": true,
+   "classes": [
+    "MESSAGE"
+   ],
+   "reasons": [
+    "sendmail sends email"
+   ]
+  },
+  {
+   "line": 55,
+   "command": "mail -s \"Invoice 1043\" client@example.com < invoice.txt",
+   "held": true,
+   "classes": [
+    "MESSAGE"
+   ],
+   "reasons": [
+    "mail sends email"
+   ]
+  },
+  {
+   "line": 56,
+   "command": "git reset --hard origin/main && git push -f",
+   "held": true,
+   "classes": [
+    "DESTROY_LOCAL",
+    "PUSH"
+   ],
+   "reasons": [
+    "git reset --hard",
+    "git push"
+   ]
+  },
+  {
+   "line": 57,
+   "command": "bash -c \"npm publish\"",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "npm publish"
+   ]
+  },
+  {
+   "line": 58,
+   "command": "sudo env NODE_ENV=production npm publish",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "npm publish"
+   ]
+  },
+  {
+   "line": 59,
+   "command": "timeout 60 git push origin main",
+   "held": true,
+   "classes": [
+    "PUSH"
+   ],
+   "reasons": [
+    "git push"
+   ]
+  },
+  {
+   "line": 60,
+   "command": "echo v1.4.3 | xargs gh release create",
+   "held": true,
+   "classes": [
+    "PUBLISH"
+   ],
+   "reasons": [
+    "gh release create"
+   ]
+  }
+ ],
+ "everyday": [
+  {
+   "line": 1,
+   "command": "git status",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 2,
+   "command": "git status -sb",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 3,
+   "command": "git log --oneline -20",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 4,
+   "command": "git log -p -- src/invoice.ts",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 5,
+   "command": "git diff",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 6,
+   "command": "git diff --staged",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 7,
+   "command": "git diff main...feature/invoices",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 8,
+   "command": "git show HEAD",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 9,
+   "command": "git show HEAD~2:package.json",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 10,
+   "command": "git branch -a",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 11,
+   "command": "git branch feature/pdf-export",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 12,
+   "command": "git checkout -b fix/rounding",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 13,
+   "command": "git switch main",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 14,
+   "command": "git add src/invoice.ts",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 15,
+   "command": "git add -A",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 16,
+   "command": "git commit -m \"Fix rounding in invoice totals\"",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 17,
+   "command": "git commit --amend --no-edit",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 18,
+   "command": "git stash",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 19,
+   "command": "git stash pop",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 20,
+   "command": "git fetch origin",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 21,
+   "command": "git pull --rebase origin main",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 22,
+   "command": "git merge --no-ff feature/pdf-export",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 23,
+   "command": "git rebase main",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 24,
+   "command": "git tag v1.4.3",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 25,
+   "command": "git blame src/invoice.ts",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 26,
+   "command": "git rev-parse HEAD",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 27,
+   "command": "git remote -v",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 28,
+   "command": "git clean -n",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 29,
+   "command": "git grep \"TODO\"",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 30,
+   "command": "git cherry-pick a1b2c3d",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 31,
+   "command": "git restore src/invoice.ts",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 32,
+   "command": "git worktree list",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 33,
+   "command": "gh pr view 42",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 34,
+   "command": "gh pr list --state open",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 35,
+   "command": "gh pr diff 42",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 36,
+   "command": "gh pr checks 42",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 37,
+   "command": "gh pr create --draft --title \"Fix rounding\" --body \"WIP\"",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 38,
+   "command": "gh issue list --label bug",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 39,
+   "command": "gh issue view 12",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 40,
+   "command": "gh run list --limit 5",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 41,
+   "command": "gh run view 123456 --log-failed",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 42,
+   "command": "gh release list",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 43,
+   "command": "gh api repos/acme/app/pulls",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 44,
+   "command": "npm install",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 45,
+   "command": "npm ci",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 46,
+   "command": "npm test",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 47,
+   "command": "npm run build",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 48,
+   "command": "npm run lint",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 49,
+   "command": "npm run dev",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 50,
+   "command": "npm outdated",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 51,
+   "command": "npm audit",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 52,
+   "command": "npm version patch",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 53,
+   "command": "npm pack",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 54,
+   "command": "npm ls --depth 0",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 55,
+   "command": "npm view react version",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 56,
+   "command": "npx prettier --check .",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 57,
+   "command": "npx tsc --noEmit",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 58,
+   "command": "npx eslint src",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 59,
+   "command": "npx vitest run",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 60,
+   "command": "yarn install",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 61,
+   "command": "yarn test",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 62,
+   "command": "pnpm install --frozen-lockfile",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 63,
+   "command": "pnpm build",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 64,
+   "command": "node scripts/seed.js",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 65,
+   "command": "pip install -r requirements.txt",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 66,
+   "command": "pip install -e .",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 67,
+   "command": "pip list --outdated",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 68,
+   "command": "pip freeze",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 69,
+   "command": "python -m pytest -q",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 70,
+   "command": "python -m pytest tests/test_invoice.py -k rounding",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 71,
+   "command": "python manage.py migrate --plan",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 72,
+   "command": "python manage.py runserver",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 73,
+   "command": "python -m venv .venv",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 74,
+   "command": "python scripts/report.py --dry-run",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 75,
+   "command": "python -m build",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 76,
+   "command": "ruff check .",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 77,
+   "command": "black --check .",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 78,
+   "command": "mypy src",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 79,
+   "command": "uv sync",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 80,
+   "command": "uv run pytest",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 81,
+   "command": "poetry install",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 82,
+   "command": "cargo build --release",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 83,
+   "command": "cargo test",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 84,
+   "command": "cargo clippy",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 85,
+   "command": "cargo fmt --check",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 86,
+   "command": "go build ./...",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 87,
+   "command": "go test ./...",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 88,
+   "command": "go mod tidy",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 89,
+   "command": "make",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 90,
+   "command": "make test",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 91,
+   "command": "make build",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 92,
+   "command": "docker build -t ledgerly:dev .",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 93,
+   "command": "docker run --rm -p 3000:3000 ledgerly:dev",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 94,
+   "command": "docker ps",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 95,
+   "command": "docker logs web",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 96,
+   "command": "docker compose up -d",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 97,
+   "command": "docker compose down",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 98,
+   "command": "docker images",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 99,
+   "command": "terraform init",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 100,
+   "command": "terraform plan",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 101,
+   "command": "terraform fmt -check",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 102,
+   "command": "terraform validate",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 103,
+   "command": "terraform show",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 104,
+   "command": "kubectl get pods",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 105,
+   "command": "kubectl describe pod web-7f9c",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 106,
+   "command": "kubectl logs deployment/web --tail 100",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 107,
+   "command": "kubectl get svc -n prod",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 108,
+   "command": "helm template web ./chart",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 109,
+   "command": "helm lint ./chart",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 110,
+   "command": "aws s3 ls s3://acme-backups",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 111,
+   "command": "aws sts get-caller-identity",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 112,
+   "command": "aws ec2 describe-instances --filters Name=tag:env,Values=prod",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 113,
+   "command": "gcloud config list",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 114,
+   "command": "curl https://api.github.com/repos/acme/app",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 115,
+   "command": "curl -s https://registry.npmjs.org/ledgerly | jq .version",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 116,
+   "command": "curl -I https://ledgerly.app",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 117,
+   "command": "curl -X GET https://api.acme.io/v1/health",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 118,
+   "command": "curl -s http://localhost:3000/api/invoices",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 119,
+   "command": "curl -X POST http://localhost:3000/api/invoices -d @fixture.json",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 120,
+   "command": "wget -q https://example.com/data.csv -O data.csv",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 121,
+   "command": "psql $DATABASE_URL -c 'SELECT count(*) FROM invoices'",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 122,
+   "command": "sqlite3 dev.db '.tables'",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 123,
+   "command": "redis-cli -u $REDIS_URL GET session:42",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 124,
+   "command": "ls -la",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 125,
+   "command": "ls dist",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 126,
+   "command": "cat package.json",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 127,
+   "command": "head -50 CHANGELOG.md",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 128,
+   "command": "tail -f logs/app.log",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 129,
+   "command": "grep -rn \"calculateTotal\" src",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 130,
+   "command": "rg \"TODO\" src",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 131,
+   "command": "find . -name \"*.test.ts\"",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 132,
+   "command": "sed -i 's/1.4.2/1.4.3/' README.md",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 133,
+   "command": "awk -F, '{print $2}' data.csv",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 134,
+   "command": "wc -l src/*.ts",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 135,
+   "command": "jq '.version' package.json",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 136,
+   "command": "mkdir -p build/reports",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 137,
+   "command": "cp .env.example .env.local",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 138,
+   "command": "mv notes.txt docs/notes.txt",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 139,
+   "command": "rm notes.txt",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 140,
+   "command": "rm -rf node_modules",
+   "held": true,
+   "classes": [
+    "DESTROY_LOCAL"
+   ],
+   "reasons": [
+    "rm -r or -f"
+   ]
+  },
+  {
+   "line": 141,
+   "command": "rm -rf dist",
+   "held": true,
+   "classes": [
+    "DESTROY_LOCAL"
+   ],
+   "reasons": [
+    "rm -r or -f"
+   ]
+  },
+  {
+   "line": 142,
+   "command": "chmod +x scripts/release.sh",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 143,
+   "command": "tar -czf backup.tgz src",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 144,
+   "command": "unzip assets.zip -d assets",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 145,
+   "command": "echo \"build ok\"",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 146,
+   "command": "env | grep NODE",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 147,
+   "command": "ps aux | grep node",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 148,
+   "command": "du -sh node_modules",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 149,
+   "command": "vercel dev",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  },
+  {
+   "line": 150,
+   "command": "fly status",
+   "held": false,
+   "classes": [],
+   "reasons": []
+  }
+ ]
+}
