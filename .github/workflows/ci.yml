@@ -13,3 +13,4 @@ jobs:
       - run: pip install pytest
       - run: python -m pytest -q tests
       - run: python scripts/check_copy.py
+      - run: python scripts/facts.py --check
