@@ -1,0 +1,50 @@
+[
+ {
+  "id": "s1",
+  "text": "Abeyance. A matter held, not dropped, until its owner decides.",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "id": "s2",
+  "text": "At two fourteen, Ines's nightly Hermes job finished its tests, and reached the step that pushes a release. She was asleep.",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "id": "s3",
+  "text": "Abeyance stops that one step before it runs, keeps the work already done, and sends one card to her phone. Written by code.",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "id": "s4",
+  "text": "She replies resume. Abeyance checks the repo is the one she was shown. Hermes asks her to confirm the exact command. One tap, and the job finishes. A real push. A real release.",
+  "lead": 0.8,
+  "tail": 0.6
+ },
+ {
+  "id": "s5",
+  "text": "If the repo moved, nothing runs, no model is called, and she is told exactly what changed.",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "id": "s6",
+  "text": "Strangers, replays, disguised commands and subagents are held too. Twenty eight of twenty eight break cases blocked. Two of a hundred and fifty everyday commands held by mistake, and published.",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "id": "s7",
+  "text": "Five hooks, durable state, and Hermes's own approval gate as the authority. More than a prompt or a skill could do.",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "id": "s8",
+  "text": "Abeyance. Night runs without blind trust.",
+  "lead": 0.8,
+  "tail": 1.5
+ }
+]

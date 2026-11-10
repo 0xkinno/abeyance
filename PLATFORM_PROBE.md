@@ -2,7 +2,7 @@
 
 Hermes commit `3d4dd108cf52e26cf0d7fb218461e53623a8ec2d` (2026-11-10), run offline on Hermes's own
 scripted provider (`tests/fakes/fake_llm_provider.py`) through the real cron scheduler tick and the real
-agent loop. Items marked LIVE need a real Telegram and model key and run in Codespaces
+agent loop. Items marked LIVE ran on a real Telegram and model key in a Codespace (see EVIDENCE.md and eval/results/real_run.json)
 (`docs/CODESPACES.md`); they are not claimed until `eval/results/live_probe.txt` exists.
 
 | # | Question | Result | Evidence |

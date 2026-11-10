@@ -21,7 +21,7 @@ LOCAL_PLATFORMS = {"", "cli", "tui", "desktop", "local"}
 # answer a park, whatever user id the payload claims.
 NO_RESUME_PLATFORMS = {"webhook", "msgraph_webhook", "api_server", "cron"}
 READ_ONLY_TOOLS = {"read_file", "search_files", "list_files", "web_search", "web_extract", "skill_view", "skills_list",
-                   "session_search", "todo", "clarify", "memory"}
+                   "session_search", "todo", "clarify"}
 
 
 @dataclass
@@ -33,9 +33,14 @@ class Settings:
 
     @classmethod
     def from_config(cls, get: Callable[[str, object], object]) -> "Settings":
+        raw = get("owners", []) or []
+        if isinstance(raw, (str, int)):          # a single id written as a scalar, not a list
+            raw = [raw]
+        elif not isinstance(raw, (list, tuple, set)):
+            raw = []                              # unreadable owners: nobody is an owner (fails closed)
         return cls(
             expiry_hours=float(get("expiry_hours", 18.0)),
-            owners=[s for s in (str(x).replace("﻿", "").strip() for x in (get("owners", []) or [])) if s],
+            owners=[s for s in (str(x).replace("﻿", "").strip() for x in raw) if s],
             interactive=str(get("interactive", "ask")),
             policy=PolicyConfig.from_settings({"hold": get("hold", []), "allow": get("allow", []), "workdir": get("workdir", None)}),
         )
@@ -112,14 +117,14 @@ class Engine:
     def _owner_ok(self, actor: str, platform: str) -> bool:
         if platform in NO_RESUME_PLATFORMS:
             return False
-        if platform in LOCAL_PLATFORMS:
-            return True
+        if platform in LOCAL_PLATFORMS and not (platform == "" and actor):
+            return True                           # local CLI or Desktop; an unknown platform that names a user is not local
         return bool(self.s.owners) and actor in self.s.owners
 
     # pre_tool_call
     def pre_tool_call(self, tool_name: str, args: dict, task_id: str = "", **kw) -> Optional[dict]:
         session_id = kw.get("session_id") or task_id or ""
-        args = args or {}
+        args = args if isinstance(args, dict) else {}
         run = self._run_for(session_id, task_id)
         decision = classify(tool_name, args, self.s.policy)
         call_digest = drift.digest({"tool": tool_name, "args": args})
@@ -127,13 +132,10 @@ class Engine:
         if run is not None:
             frozen = self.store.frozen_park(run.execution_id)
             if frozen is not None and tool_name not in READ_ONLY_TOOLS:
-                return {"action": "block", "message": f"ABEYANCE: this run is waiting for its owner (park {frozen.code}). "
+                return {"action": "block", "message": "ABEYANCE: this run is waiting for its owner. "
                                                       "Take no further actions. End your turn with one short sentence."}
             if not decision.hold:
                 return None
-            done = self.store.was_executed(call_digest, run.job_id)
-            if done is not None:
-                return {"action": "block", "message": f"ABEYANCE: this exact step already ran (park {done['park_code']}). Do not repeat it."}
             now = self.env.now()
             park = Park(code=self.store.new_code(), created_at=now, expires_at=now + self.s.expiry_hours * 3600,
                         job_id=run.job_id, job_name=run.job_name, execution_id=run.execution_id, session_id=session_id,
@@ -141,8 +143,8 @@ class Engine:
                         classes=decision.classes, reasons=decision.reasons,
                         snapshot=drift.snapshot(self.env.cwd(), tool_name, args), status="parked")
             self.store.create_park(park)
-            return {"action": "block", "message": f"ABEYANCE: parked as {park.code}. This step needs the owner "
-                                                  f"({', '.join(decision.classes)}). Stop now: take no other actions and end your turn."}
+            return {"action": "block", "message": f"ABEYANCE: this step needs the owner ({', '.join(decision.classes)}) and is parked. "
+                                                  "Stop now: take no other actions and end your turn."}
 
         bound = self.store.resume_binding(session_id) if session_id else None
         if bound is not None:
@@ -154,7 +156,7 @@ class Engine:
                 return {"action": "block", "message": f"ABEYANCE: the approved step is `{_summary(bound.tool, bound.args)}`. "
                                                       "Run exactly that call first, unchanged."}
         resumed = self.store.session_park(session_id) if session_id else None
-        if decision.hold and resumed is not None and self.store.was_executed(call_digest, resumed.job_id):
+        if decision.hold and resumed is not None and self.store.was_executed(call_digest, resumed.job_id, resumed.code):
             return {"action": "block", "message": f"ABEYANCE: this exact step already ran (park {resumed.code}). Do not repeat it."}
         if decision.hold and self.s.interactive == "ask":
             why = "; ".join(CLASSES.get(c, c.lower()) for c in decision.classes)
@@ -164,7 +166,7 @@ class Engine:
     # post_tool_call
     def post_tool_call(self, tool_name: str, args: dict, result: str, task_id: str = "", **kw) -> None:
         session_id = kw.get("session_id") or task_id or ""
-        args = args or {}
+        args = args if isinstance(args, dict) else {}
         ok, excerpt = _result_ok(result)
         run = self._run_for(session_id, task_id)
         if run is not None and self.store.frozen_park(run.execution_id) is None:
@@ -195,14 +197,14 @@ class Engine:
         code = resume_code(user_message)
         if code is None:
             return None
+        actor = self.env.session_env("HERMES_SESSION_ACTOR_ID")
+        platform = self.env.session_env("HERMES_SESSION_PLATFORM") or kw.get("platform", "")
+        if self.is_unattended(session_id) or not self._owner_ok(actor, platform):
+            self.store.event(code, "refused_actor", f"{platform}:{actor}")
+            return {"action": "block", "message": "Abeyance: only the job's owner can resume it. Nothing ran."}
         park = self.store.get(code)
         if park is None:
             return {"action": "block", "message": f"Abeyance has no park named {code}."}
-        actor = self.env.session_env("HERMES_SESSION_ACTOR_ID")
-        platform = self.env.session_env("HERMES_SESSION_PLATFORM") or kw.get("platform", "")
-        if not self._owner_ok(actor, platform):
-            self.store.event(code, "refused_actor", f"{platform}:{actor}")
-            return {"action": "block", "message": "Abeyance: only the job's owner can resume it. Nothing ran."}
         if park.status != "parked":
             return {"action": "block", "message": f"Abeyance: {code} is already {park.status}."}
         if self.env.now() > park.expires_at:

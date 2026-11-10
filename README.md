@@ -2,29 +2,29 @@
 
 # Abeyance
 
-**Your Hermes cron jobs, reliable enough to leave alone: at the one step a night run should not take by itself, it waits for you, and finishes from that step when you say yes.**
+**A night cron job that pauses before it pushes or publishes, texts you one card, and finishes from that step when you say yes.**
 
 ![CI](https://github.com/0xkinno/abeyance/actions/workflows/ci.yml/badge.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue) ![Hermes >= 0.23.0](https://img.shields.io/badge/Hermes-%3E%3D0.23.0-informational)
 
 | | |
 |---|---|
-| Install | `hermes plugins install 0xkinno/abeyance#abeyance` (`hermes plugins install abeyance` once listed) |
-| Try in a few seconds | `/abeyance demo` or `hermes abeyance demo` (no model key, no setup) |
+| Install | `hermes plugins install 0xkinno/abeyance#abeyance`, then set `owners` to your Telegram user id (message @userinfobot to read it) |
+| Try in about 5 seconds | `/abeyance demo` or `hermes abeyance demo` (no model key, no setup) |
 | Demo video | not recorded yet |
-| Catalog PR | not opened yet |
+| Catalog PR | [NousResearch/hermes-agent#152854](https://github.com/NousResearch/hermes-agent/pull/152854) |
 | Built on | Hermes cron (execution identity), the approval gate, the `pre_llm_call` turn gate, subagent lifecycle, `plugin_db`, the Desktop SDK |
-| Measured | held 60 of 60 world-changing commands (56 of 60 on the first run, before four rules were added), 2 of 150 everyday commands held by mistake, 0 model calls added by a park, 33 of 33 cases passed on a real Hermes loop with a scripted model. One real run on Telegram: a held `git push` and a held `gh release create` each ran after one `resume` and one tap, [release v0.0.2](https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2) |
+| Measured | held 56 of 60 world-changing commands on the first run and 60 of 60 after four rules were added (tuned on that corpus), 2 of 150 everyday commands held by mistake, 0 model calls added by a park, 33 of 33 cases passed on a real Hermes loop with a scripted model. One real run on Telegram: a held `git push` and a held `gh release create` each ran after one `resume` and one tap, [release v0.0.2](https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2) |
 
-<p align="center"><img src="assets/screenshots/demo-cli.png" alt="Output of /abeyance demo" width="100%"><br><sub>Output of <code>python -m abeyance.demo</code>: a scripted run through the real Abeyance code. Desktop and drift-refusal captures are not taken yet.</sub></p>
+<p align="center"><img src="assets/screenshots/demo-cli.png" alt="Output of /abeyance demo" width="100%"><br><sub>Output of <code>/abeyance demo</code> (<code>python -m abeyance.demo</code>): a scripted run through the real Abeyance code. The CLI and Telegram paths ran live; the Desktop page and the live drift refusal were not captured.</sub></p>
 
 <table><tr>
-<td><img src="assets/screenshots/telegram-card.png" alt="The card in Telegram"><br><sub>Telegram, 21:00 UTC: the card for the parked <code>git push</code>.</sub></td>
-<td><img src="assets/screenshots/approval-after-resume.png" alt="Hermes approval card after resume"><br><sub>Telegram, 21:08: after <code>resume</code>, Hermes's own approval card for the exact step.</sub></td>
+<td><img src="assets/screenshots/telegram-card.png" alt="The card in Telegram"><br><sub>Telegram, 21:00 local time (UTC+1): the card for the parked <code>git push</code>.</sub></td>
+<td><img src="assets/screenshots/approval-after-resume.png" alt="Hermes approval card after resume"><br><sub>Telegram, 21:08 local time: after <code>resume</code>, Hermes's own approval card for the exact step.</sub></td>
 </tr></table>
 
 ## 2:14 on a Tuesday
 
-Ines Duarte (fictional, like her invoicing app Ledgerly) runs Hermes on a mini PC under her desk. It reaches her on Telegram. Her job "Nightly release" fires at 02:00.
+Ines Duarte (an illustrative developer, like her invoicing app Ledgerly) runs Hermes on a mini PC under her desk. It reaches her on Telegram. Her job "Nightly release" fires at 02:00.
 
 At 02:14 the tests pass and the next step is `npm publish`. She is asleep.
 
@@ -130,9 +130,9 @@ Wrappers are read through: `bash -c`, `sudo`, `env`, `timeout`, `xargs`, `eval`,
 | Promise | Enforced in | Tested by |
 |---|---|---|
 | Never approves anything itself; the live step goes to Hermes's own gate | `engine.py` `pre_tool_call` (`approve` directive) | `eval/campaign.py` `park_and_resume_end_to_end` |
-| Never runs a step after the world moved | `drift.py`, `engine.py` `pre_llm_call` | `drift_*` (4 cases, 0 model calls) |
-| Never runs a step twice | `store.py` ledger and compare-and-set | `resume_twice`, `resume_in_two_chats_at_once`, `repeats_a_step_that_already_ran` |
-| Never lets a stranger resume | `engine.py` `_owner_ok` | `stranger_in_group_chat`, `empty_owners_on_a_chat_platform`, `forged_resume_text_in_a_webhook` |
+| Refuses a resume when the repo or the files the step names changed since the card (git HEAD, branch, upstream, uncommitted changes, file hashes) | `drift.py`, `engine.py` `pre_llm_call` | `drift_*` (4 cases, 0 model calls). Limits: drift is read from git and from files the step names; it is checked at the resume message, not at the moment the command runs |
+| Never runs a parked step twice | `store.py` ledger (one entry per park) and compare-and-set | `resume_twice`, `resume_in_two_chats_at_once`, `repeats_a_step_that_already_ran`, `test_the_same_command_on_a_later_night_parks_again` |
+| Never lets a stranger, a cron session or a subagent resume | `engine.py` `_owner_ok`, `pre_llm_call` | `stranger_in_group_chat`, `empty_owners_on_a_chat_platform`, `forged_resume_text_in_a_webhook`, `tests/test_hardening.py` |
 | Never runs an expired step | `engine.py` `pre_llm_call` | `resume_after_expiry` |
 
 ## Hermes, specifically
@@ -161,7 +161,7 @@ Hermes's own detector flags 6 of 6 commands that damage the machine and 9 of 60 
 
 ## Recovery
 
-- Gateway restart: parks live in SQLite under `<HERMES_HOME>/plugin-data/abeyance/`. Separate processes sharing it are tested; a literal gateway restart was measured once: a park made at 19:59 UTC survived a gateway restart at about 20:07 and was resumed at 20:08.
+- Gateway restart: parks live in SQLite under `<HERMES_HOME>/plugin-data/abeyance/`. A literal gateway restart was measured once (EVIDENCE.md): park VVYZ, made at 19:59 UTC, survived a restart at about 20:07 and was resumed after it.
 - Expiry: after `expiry_hours` (default 18) the step cannot run; a new run parks again.
 - A resumed step that fails stays `resumed` and the failure is logged; the owner sees it.
 - Internal error: in a cron run the step is held; in a live chat Hermes behaves as without the plugin; a resume whose check fails is refused. `ABEYANCE_FAULT=store|policy|drift` exercises this.
@@ -172,12 +172,12 @@ Hermes's own detector flags 6 of 6 commands that damage the machine and 9 of 60 
 |---|---|
 | Usefulness | the card above, `/abeyance demo`, the blueprint |
 | Reliability | `PROOF.md`, `eval/campaign.py`, the published false holds |
-| Polish | deterministic cards, `hermes abeyance`, Desktop page |
+| Polish | deterministic cards, `hermes abeyance`, the demo, the Desktop page (written to the SDK contract, not yet run in the Desktop app) |
 | Creativity | an unattended run that waits for a person and resumes bound to the world they saw |
 
 ## Disclosure
 
-Runs read-only local git (`rev-parse`, `status`) in the job's working folder to snapshot it; hashes up to 20 files the held step names plus package manifests; stores parks (the held command and arguments, a git snapshot, step summaries with up to 300-character output excerpts) and events in `<HERMES_HOME>/plugin-data/abeyance/` (SQLite). Never approves a step itself, never auto-approves, never changes `cron_mode`. No network calls, no credentials, no telemetry, no Python dependencies. The demo writes a throwaway git repo under the plugin data folder and removes it.
+Runs read-only local git (`rev-parse`, `status`) in the job's working folder to snapshot it; hashes up to 20 files the held step names plus package manifests; stores parks (the held command and arguments verbatim, not redacted, so a held command that carries a token is stored with it; a git snapshot, step summaries with up to 300-character output excerpts) and events in `<HERMES_HOME>/plugin-data/abeyance/` (SQLite). Never approves a step itself, never auto-approves, never changes `cron_mode`. No network calls, no credentials, no telemetry, no Python dependencies. The demo writes a throwaway git repo under the plugin data folder and removes it.
 
 ## Run it locally
 

@@ -23,6 +23,8 @@ paid models returned HTTP 402. The raw record is `eval/results/real_run.json`
 | TJP6 | 20:46:57 | `gh release create v0.0.2 --generate-notes` | resumed 20:49:19, the step failed | `gh` used the Codespace `GITHUB_TOKEN` (scoped to another repo): 403. Fixed with a `gh` wrapper that uses the demo token. |
 | J8GV | 20:53:17 | same | executed 20:55:06 | The release was created after `resume J8GV` and Allow Once. |
 
+Gateway restart (P8): the gateway was restarted at about 20:07 UTC, after VVYZ was parked at 19:59:56 and before it was resumed at 20:08:15. The park survived. The restart also showed Hermes's own notice "Hermes is shutting down" in the chat at 21:07 local time.
+
 Parks made 0 extra model requests; each resume is one normal turn.
 
 ## What this shows and what it does not

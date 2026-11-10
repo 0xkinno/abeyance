@@ -2,7 +2,7 @@
 
 Last updated 2026-11-10.
 
-Done: Phases 0 to 4. The real run happened on Telegram: a held `git push` and a held `gh release create`
+Done: Phases 0 to 4 except a live resume on CLI and Desktop and the `ask_choice` deny confirmation. The real run happened on Telegram: a held `git push` and a held `gh release create`
 each ran after one `resume` and one tap (release v0.0.2 on `0xkinno/abeyance-demo`). The catalog PR is open
 (NousResearch/hermes-agent#152854). Evidence, including the two parks that failed for our own reasons,
 is in EVIDENCE.md.

@@ -27,7 +27,7 @@ def park_one(e):
     assert e.pre_tool_call("terminal", {"command": "npm ci"}, task_id="cron-s") is None
     e.post_tool_call("terminal", {"command": "npm ci"}, '{"exit_code":0}', task_id="cron-s")
     d = e.pre_tool_call("terminal", {"command": "npm publish"}, task_id="cron-s")
-    assert d["action"] == "block" and "parked as" in d["message"]
+    assert d["action"] == "block" and "is parked" in d["message"]
     return e.store.list_parks("parked")[0]
 
 def test_park_freeze_card(repo):
@@ -79,7 +79,7 @@ def test_subagent_inherits_park(repo):
     e.subagent_start(parent_session_id="cron-s", child_session_id="child-s")
     st["cron"] = False   # children read None from current_cron_execution
     d = e.pre_tool_call("terminal", {"command": "git push origin main"}, task_id="child-s")
-    assert d["action"] == "block" and "parked as" in d["message"]
+    assert d["action"] == "block" and "is parked" in d["message"]
 
 def test_live_session_escalates(repo):
     e, clock, st = make(repo, cron=False)

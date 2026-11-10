@@ -7,3 +7,5 @@ node_modules/
 .env
 *.db
 media/raw/
+video/build/
+video/*.mp4

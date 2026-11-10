@@ -6,7 +6,7 @@ license: MIT
 homepage: https://github.com/0xkinno/abeyance
 manifest_version: 2
 api_version: 1
-requires_hermes: ">=0.23.0"   # confirm against the probed release in Phase 0 (rule 14)
+requires_hermes: ">=0.23.0"
 tags: [cron, approvals, automation, human-in-the-loop]
 provides_tools: []
 provides_hooks:

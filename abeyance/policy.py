@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import fnmatch
 import json
+import posixpath
 import re
 import shlex
 from dataclasses import dataclass, field
@@ -32,16 +33,38 @@ CLASSES = {
 _WRAPPERS = {"sudo", "doas", "nohup", "time", "nice", "ionice", "stdbuf", "command", "exec", "builtin"}
 _DESTROY_CMDS = frozenset({"dd", "mkfs", "shred", "truncate"})
 _SHELLS = {"bash", "sh", "zsh", "dash", "ksh", "fish"}
+_SHELL_C = re.compile(r"^-[A-Za-z]*c[A-Za-z]*$")
+_WRAPPER_VALUE_FLAGS = {"sudo": {"-u", "-g", "-h", "-p", "-C", "-D", "-R", "-T", "-U"}, "doas": {"-u", "-C"},
+                        "nice": {"-n"}, "ionice": {"-c", "-n", "-p"}, "time": {"-f", "-o"}}
+_GIT_GLOBAL_VALUE_FLAGS = {"-C", "-c", "--git-dir", "--work-tree", "--namespace", "--exec-path", "--super-prefix"}
 _LOOPBACK = re.compile(r"https?://(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)(:\d+)?(/|$)", re.I)
 _MONEY_HOSTS = re.compile(r"api\.(stripe\.com|paypal\.com|sandbox\.paypal\.com|squareup\.com|paystack\.co|flutterwave\.com)", re.I)
 _SQL_WRITE = re.compile(r"\b(insert|update|delete|drop|alter|truncate|create|grant|revoke|replace)\b", re.I)
-_TOOL_WORLD = re.compile(
-    r"(send|post|publish|tweet|email|mail|message|reply|comment|merge|delete|remove|destroy|pay|charge|"
-    r"refund|transfer|payout|invoice|deploy|release|create_issue|close_issue|archive)", re.I)
-_TOOL_READ = re.compile(r"(^|_)(get|list|read|search|fetch|query|find|describe|view|show|status)(_|$)", re.I)
+# MCP and plugin tool names are split into words (snake, kebab or camel case) and read word by word.
+_TOOL_STRICT = {"send", "post", "publish", "tweet", "merge", "delete", "remove", "destroy", "refund", "payout", "deploy",
+                "update", "put", "write", "upsert", "insert", "modify", "push", "submit", "trigger", "cancel", "approve",
+                "grant", "revoke", "close", "drop", "terminate", "kill", "reset", "create", "execute"}
+_TOOL_SOFT = {"email", "mail", "message", "reply", "comment", "pay", "charge", "transfer", "invoice", "release", "archive"}
+_TOOL_READ_FIRST = {"get", "list", "read", "search", "fetch", "query", "find", "describe", "view", "show", "status", "check", "count", "lookup"}
+_MONEY_WORDS = {"pay", "charge", "refund", "transfer", "payout", "invoice"}
 _PY_WORLD = re.compile(
     r"(requests|httpx|aiohttp|urllib3?)\.(post|put|patch|delete|request)|smtplib|"
     r"subprocess\.|os\.system|os\.popen|shutil\.rmtree", re.I)
+_PY_URLLIB_WRITE = re.compile(r"urllib\.request\.(urlopen|Request)\([^)]*(data\s*=|method\s*=\s*['\"](POST|PUT|PATCH|DELETE))", re.I | re.S)
+
+
+def _tool_words(verb):
+    spaced = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", verb)
+    return [w for w in re.split(r"[_\-\s.]+", spaced.lower()) if w]
+
+
+def _word_in(words, vocab):
+    out = []
+    for w in words:
+        stem = w[:-1] if w.endswith("s") and len(w) > 3 else w
+        if w in vocab or stem in vocab:
+            out.append(stem if stem in vocab else w)
+    return out
 
 
 @dataclass
@@ -74,6 +97,7 @@ def _split_segments(command: str) -> list[list[str]]:
         text = inner[0] or inner[1]
         if text.strip():
             out.extend(_split_segments(text))
+    command = command.replace("\r", "").replace("\n", " ; ")       # a new line ends a command, like ';'
     try:
         lex = shlex.shlex(command, posix=True, punctuation_chars=";&|")
         lex.whitespace_split = True
@@ -109,8 +133,9 @@ def _unwrap(argv: list[str]) -> list[list[str]]:
             i += 1
         elif base in _WRAPPERS:
             i += 1
+            takes_value = _WRAPPER_VALUE_FLAGS.get(base, set())
             while i < len(argv) and argv[i].startswith("-"):
-                i += 1
+                i += 2 if argv[i] in takes_value else 1
         elif base == "env":
             i += 1
             while i < len(argv) and (argv[i].startswith("-") or "=" in argv[i]):
@@ -123,9 +148,16 @@ def _unwrap(argv: list[str]) -> list[list[str]]:
             i += 1
             while i < len(argv) and argv[i].startswith("-"):
                 i += 2 if argv[i] in {"-I", "-n", "-P", "-d", "-L", "-s"} else 1
-        elif base in _SHELLS and "-c" in argv[i + 1:]:
-            j = argv.index("-c", i + 1)
+        elif base in _SHELLS and any(_SHELL_C.match(a) for a in argv[i + 1:]):
+            j = next(k for k in range(i + 1, len(argv)) if _SHELL_C.match(argv[k]))
             return _split_segments(argv[j + 1]) if j + 1 < len(argv) else []
+        elif base in {"python", "python3", "py"} and argv[i + 1:i + 2] == ["-m"] and len(argv) > i + 2:
+            i += 2                                  # `python -m twine upload` is `twine upload`
+            break
+        elif base in {"npx", "bunx", "pnpx", "uvx", "pipx"}:
+            i += 1
+            while i < len(argv) and (argv[i].startswith("-") or argv[i] == "run"):
+                i += 1
         elif base == "eval":
             return _split_segments(" ".join(argv[i + 1:]))
         else:
@@ -138,6 +170,11 @@ def _classify_argv(argv: list[str], cfg: PolicyConfig) -> list[tuple[str, str]]:
     if not argv:
         return []
     cmd = argv[0].rsplit("/", 1)[-1].lower()
+    if cmd == "git":                                # `git -C dir push` is `git push`
+        k = 1
+        while k < len(argv) and argv[k].startswith("-"):
+            k += 2 if argv[k] in _GIT_GLOBAL_VALUE_FLAGS else 1
+        argv = [argv[0]] + argv[k:]
     args = [a.lower() for a in argv[1:]]
     joined = " ".join(argv)
     sub = args[0] if args else ""
@@ -163,9 +200,17 @@ def _classify_argv(argv: list[str], cfg: PolicyConfig) -> list[tuple[str, str]]:
         elif sub in {"issue", "repo", "pr", "mr"} and len(args) > 1 and args[1] in {"close", "delete", "create", "edit", "archive", "transfer", "comment", "reopen", "lock"} \
                 and not (args[1] == "create" and "--draft" in args):
             hit("HTTP_WRITE", f"{cmd} {sub} {args[1]}")
-        elif sub == "api" and any(a in {"-x", "--method"} for a in args) and re.search(r"(?i)(-X|--method)\s*(POST|PUT|PATCH|DELETE)", joined):
-            hit("HTTP_WRITE", "gh api write")
-    elif cmd in {"npm", "pnpm", "yarn", "bun"} and (sub == "publish" or sub == "npm" and len(args) > 1 and args[1] == "publish"):
+        elif sub == "api":
+            method = ""
+            for n, a in enumerate(args):
+                if a in {"-x", "--method"} and n + 1 < len(args):
+                    method = args[n + 1].upper()
+                elif a.startswith("--method="):
+                    method = a.split("=", 1)[1].upper()
+            fields = any(a in {"-f", "-F", "--field", "--raw-field", "--input"} or a.startswith(("--field=", "--raw-field=", "--input=")) for a in args)
+            if method in {"POST", "PUT", "PATCH", "DELETE"} or (fields and method in {"", "POST"}):
+                hit("HTTP_WRITE", "gh api write")
+    elif cmd in {"npm", "pnpm", "yarn", "bun"} and "publish" in [a for a in args if not a.startswith("-")][:2]:
         hit("PUBLISH", f"{cmd} publish")
     elif cmd in {"twine"} and sub == "upload" or cmd in {"cargo", "poetry", "uv", "hatch", "flit"} and sub == "publish" or cmd == "gem" and sub == "push":
         hit("PUBLISH", f"{cmd} {sub}")
@@ -265,22 +310,29 @@ def classify(tool_name: str, args: dict | None, cfg: PolicyConfig | None = None)
             for argv in _split_segments(text):
                 segments.append(" ".join(argv))
                 hits.extend(_classify_argv(argv, cfg))
-        if re.search(r"(requests|httpx|aiohttp)\.(post|put|patch|delete)", code):
+        if re.search(r"(requests|httpx|aiohttp)\.(post|put|patch|delete)", code) or _PY_URLLIB_WRITE.search(code) \
+                or re.search(r"\.request\(\s*['\"](post|put|patch|delete)['\"]", code, re.I):
             hits.append(("HTTP_WRITE", "code writes to a remote API"))
         if "smtplib" in code:
             hits.append(("MESSAGE", "code sends email"))
         if "shutil.rmtree" in code:
             hits.append(("DESTROY_LOCAL", "code deletes a folder tree"))
     elif name in {"write_file", "patch", "edit_file", "file_edit"} and cfg.workdir:
-        path = str(args.get("path") or args.get("file_path") or "")
-        if path and path.startswith("/") and not (path + "/").startswith(cfg.workdir.rstrip("/") + "/"):
+        path = str(args.get("path") or args.get("file_path") or "").replace("\\", "/")
+        base = posixpath.normpath(cfg.workdir.replace("\\", "/"))
+        norm = posixpath.normpath(path) if path else ""
+        absolute = norm.startswith("/") or re.match(r"^[A-Za-z]:/", norm)
+        if norm and absolute and not (norm + "/").startswith(base.rstrip("/") + "/"):
             hits.append(("WRITE_OUTSIDE", f"writes {path} outside {cfg.workdir}"))
     elif name == "send_message":
         hits.append(("MESSAGE", "send_message to a chat"))
     elif name.startswith("mcp__") or "__" in name:
-        verb = name.split("__")[-1]
-        if _TOOL_WORLD.search(verb) and not _TOOL_READ.search(verb):
-            hits.append(("HTTP_WRITE" if not re.search(r"pay|charge|refund|transfer|payout|invoice", verb) else "MONEY", f"tool {tool_name}"))
+        words = _tool_words(tool_name.split("__")[-1])
+        strict, soft = _word_in(words, _TOOL_STRICT), _word_in(words, _TOOL_SOFT)
+        read_first = bool(words) and words[0] in _TOOL_READ_FIRST
+        if strict or (soft and not read_first):
+            money = _word_in(words, _MONEY_WORDS)
+            hits.append(("MONEY" if money else "HTTP_WRITE", f"tool {tool_name}"))
     for pat in cfg.hold_patterns:
         if fnmatch.fnmatch(name, pat):
             hits.append(("CUSTOM", f"matches hold rule {pat!r}"))

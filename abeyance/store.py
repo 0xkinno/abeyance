@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS steps (
 CREATE TABLE IF NOT EXISTS sessions (
   session_id TEXT PRIMARY KEY, execution_id TEXT, job_id TEXT, job_name TEXT, role TEXT, at REAL
 );
-CREATE TABLE IF NOT EXISTS executed (call_digest TEXT, job_id TEXT, park_code TEXT, at REAL, PRIMARY KEY (call_digest, job_id));
+CREATE TABLE IF NOT EXISTS executed (call_digest TEXT, job_id TEXT, park_code TEXT, at REAL, PRIMARY KEY (call_digest, job_id, park_code));
 CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, at REAL, code TEXT, kind TEXT, detail TEXT);
 """
 
@@ -171,8 +171,12 @@ class Store:
             self.conn.execute("INSERT OR IGNORE INTO executed VALUES (?,?,?,?)", (call_digest, job_id, code, time.time()))
             self.conn.commit()
 
-    def was_executed(self, call_digest: str, job_id: str) -> sqlite3.Row | None:
-        return self.conn.execute("SELECT * FROM executed WHERE call_digest=? AND job_id=?", (call_digest, job_id)).fetchone()
+    def was_executed(self, call_digest: str, job_id: str, park_code: str | None = None) -> sqlite3.Row | None:
+        """Exactly-once is per park: the same command on a later night is a new park, not a repeat."""
+        if park_code is None:
+            return self.conn.execute("SELECT * FROM executed WHERE call_digest=? AND job_id=?", (call_digest, job_id)).fetchone()
+        return self.conn.execute("SELECT * FROM executed WHERE call_digest=? AND job_id=? AND park_code=?",
+                                 (call_digest, job_id, park_code)).fetchone()
 
     def event(self, code: str, kind: str, detail: str) -> None:
         with self._lock:
