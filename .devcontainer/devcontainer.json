@@ -1,0 +1,16 @@
+{
+  "name": "abeyance",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {"version": "20"}
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "secrets": {
+    "TELEGRAM_BOT_TOKEN": {"description": "Bot token from @BotFather, for the real run's phone card"},
+    "TELEGRAM_OWNER_ID": {"description": "Your numeric Telegram user id (from @userinfobot); becomes the Abeyance owner"},
+    "OPENROUTER_API_KEY": {"description": "Or any provider key Hermes supports; used only for the live cron run and the resume turn"},
+    "DEMO_GH_TOKEN": {"description": "Fine-grained token with contents:write on 0xkinno/abeyance-demo only, for the real git push and gh release"}
+  },
+  "customizations": {"vscode": {"extensions": ["ms-python.python"]}}
+}

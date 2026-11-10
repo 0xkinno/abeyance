@@ -131,7 +131,7 @@ def run_cron(home: Path, repo: Path, bin_dir: Path, prompt: str = "Nightly relea
                        stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=300)
     outputs = sorted((home / "cron" / "output" / job_id).glob("*.md"))
     delivered = outputs[-1].read_text() if outputs else ""
-    return {"ok": "TICK-DONE" in r.stdout, "delivered": delivered, "stderr": r.stderr[-3000:]}
+    return {"ok": "TICK-DONE" in (r.stdout + r.stderr), "delivered": delivered, "stderr": r.stderr[-3000:]}
 
 
 def run_live(home: Path, repo: Path, bin_dir: Path, base_url: str, message: str, *, answer: str = "once",
@@ -139,12 +139,12 @@ def run_live(home: Path, repo: Path, bin_dir: Path, base_url: str, message: str,
     env = _env(home, bin_dir, {"FAKE_BASE_URL": base_url, "ABEYANCE_TEST_MESSAGE": message,
                                "ABEYANCE_TEST_ANSWER": answer, "ABEYANCE_TEST_PLATFORM": platform,
                                "ABEYANCE_TEST_SESSION": session, "HERMES_INTERACTIVE": "1",
-                               "TERMINAL_CWD": str(repo), **(extra_env or {})})
+                               "TERMINAL_CWD": str(repo if repo.is_dir() else home), **(extra_env or {})})
     if actor:
         env.update(HERMES_SESSION_ACTOR_ID=actor, HERMES_SESSION_PLATFORM=platform, HERMES_SESSION_USER_ID=actor)
-    r = subprocess.run([HERMES_PY, "-c", _LIVE], env=env, cwd=str(repo), stdin=subprocess.DEVNULL,
+    r = subprocess.run([HERMES_PY, "-c", _LIVE], env=env, cwd=str(repo if repo.is_dir() else home), stdin=subprocess.DEVNULL,
                        capture_output=True, text=True, timeout=300)
-    line = next((l for l in r.stdout.splitlines() if l.startswith("LIVE-RESULT ")), "")
+    line = next((l for l in (r.stdout + "\n" + r.stderr).splitlines() if l.startswith("LIVE-RESULT ")), "")
     out = json.loads(line[len("LIVE-RESULT "):]) if line else {"final": None, "exit": "crash", "asks": []}
     out["stderr"] = r.stderr[-3000:]
     return out
@@ -177,3 +177,14 @@ def events(home: Path) -> list[dict]:
         return [dict(r) for r in con.execute("SELECT code, kind, detail FROM events ORDER BY id")]
     finally:
         con.close()
+
+
+def point(home: Path, base_url: str) -> None:
+    """Route the profile (auxiliary calls included) to the scripted server for the next process."""
+    import re
+    cfg = home / "config.yaml"
+    cfg.write_text(re.sub(r"base_url: \S+", f"base_url: {base_url}", cfg.read_text()))
+
+
+def response_of(delivered: str) -> str:
+    return delivered.split("## Response", 1)[-1].strip() if delivered else ""
