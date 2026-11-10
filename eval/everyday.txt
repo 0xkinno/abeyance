@@ -1,0 +1,150 @@
+git status
+git status -sb
+git log --oneline -20
+git log -p -- src/invoice.ts
+git diff
+git diff --staged
+git diff main...feature/invoices
+git show HEAD
+git show HEAD~2:package.json
+git branch -a
+git branch feature/pdf-export
+git checkout -b fix/rounding
+git switch main
+git add src/invoice.ts
+git add -A
+git commit -m "Fix rounding in invoice totals"
+git commit --amend --no-edit
+git stash
+git stash pop
+git fetch origin
+git pull --rebase origin main
+git merge --no-ff feature/pdf-export
+git rebase main
+git tag v1.4.3
+git blame src/invoice.ts
+git rev-parse HEAD
+git remote -v
+git clean -n
+git grep "TODO"
+git cherry-pick a1b2c3d
+git restore src/invoice.ts
+git worktree list
+gh pr view 42
+gh pr list --state open
+gh pr diff 42
+gh pr checks 42
+gh pr create --draft --title "Fix rounding" --body "WIP"
+gh issue list --label bug
+gh issue view 12
+gh run list --limit 5
+gh run view 123456 --log-failed
+gh release list
+gh api repos/acme/app/pulls
+npm install
+npm ci
+npm test
+npm run build
+npm run lint
+npm run dev
+npm outdated
+npm audit
+npm version patch
+npm pack
+npm ls --depth 0
+npm view react version
+npx prettier --check .
+npx tsc --noEmit
+npx eslint src
+npx vitest run
+yarn install
+yarn test
+pnpm install --frozen-lockfile
+pnpm build
+node scripts/seed.js
+pip install -r requirements.txt
+pip install -e .
+pip list --outdated
+pip freeze
+python -m pytest -q
+python -m pytest tests/test_invoice.py -k rounding
+python manage.py migrate --plan
+python manage.py runserver
+python -m venv .venv
+python scripts/report.py --dry-run
+python -m build
+ruff check .
+black --check .
+mypy src
+uv sync
+uv run pytest
+poetry install
+cargo build --release
+cargo test
+cargo clippy
+cargo fmt --check
+go build ./...
+go test ./...
+go mod tidy
+make
+make test
+make build
+docker build -t ledgerly:dev .
+docker run --rm -p 3000:3000 ledgerly:dev
+docker ps
+docker logs web
+docker compose up -d
+docker compose down
+docker images
+terraform init
+terraform plan
+terraform fmt -check
+terraform validate
+terraform show
+kubectl get pods
+kubectl describe pod web-7f9c
+kubectl logs deployment/web --tail 100
+kubectl get svc -n prod
+helm template web ./chart
+helm lint ./chart
+aws s3 ls s3://acme-backups
+aws sts get-caller-identity
+aws ec2 describe-instances --filters Name=tag:env,Values=prod
+gcloud config list
+curl https://api.github.com/repos/acme/app
+curl -s https://registry.npmjs.org/ledgerly | jq .version
+curl -I https://ledgerly.app
+curl -X GET https://api.acme.io/v1/health
+curl -s http://localhost:3000/api/invoices
+curl -X POST http://localhost:3000/api/invoices -d @fixture.json
+wget -q https://example.com/data.csv -O data.csv
+psql $DATABASE_URL -c 'SELECT count(*) FROM invoices'
+sqlite3 dev.db '.tables'
+redis-cli -u $REDIS_URL GET session:42
+ls -la
+ls dist
+cat package.json
+head -50 CHANGELOG.md
+tail -f logs/app.log
+grep -rn "calculateTotal" src
+rg "TODO" src
+find . -name "*.test.ts"
+sed -i 's/1.4.2/1.4.3/' README.md
+awk -F, '{print $2}' data.csv
+wc -l src/*.ts
+jq '.version' package.json
+mkdir -p build/reports
+cp .env.example .env.local
+mv notes.txt docs/notes.txt
+rm notes.txt
+rm -rf node_modules
+rm -rf dist
+chmod +x scripts/release.sh
+tar -czf backup.tgz src
+unzip assets.zip -d assets
+echo "build ok"
+env | grep NODE
+ps aux | grep node
+du -sh node_modules
+vercel dev
+fly status

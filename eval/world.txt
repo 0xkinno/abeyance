@@ -1,0 +1,60 @@
+git push origin main
+git push --force origin main
+git push --force-with-lease
+git push origin --tags
+git push origin :refs/tags/v1.0.0
+git push -u origin feature/invoices
+gh pr merge 42 --squash --delete-branch
+gh pr merge --auto --merge
+gh release create v1.4.3 --notes "patch"
+gh issue close 12
+gh issue comment 12 --body "fixed in 1.4.3"
+gh repo delete acme/old-site --yes
+glab mr merge 7
+npm publish
+npm publish --access public
+yarn npm publish
+pnpm publish --no-git-checks
+twine upload dist/*
+cargo publish
+gem push ledgerly-1.4.3.gem
+docker push ghcr.io/acme/app:latest
+helm push chart.tgz oci://registry.acme.io/charts
+terraform apply -auto-approve
+terraform destroy -auto-approve
+kubectl apply -f deploy.yaml
+kubectl delete deployment web
+kubectl rollout restart deployment/web
+helm upgrade --install web ./chart
+vercel --prod
+fly deploy
+netlify deploy --prod
+gcloud run deploy web --source .
+heroku releases:rollback v41
+ssh prod 'systemctl restart app'
+rsync -az dist/ deploy@web1:/srv/app
+aws s3 rm s3://acme-backups --recursive
+aws s3 sync ./site s3://acme-site --delete
+aws ec2 terminate-instances --instance-ids i-0abc123
+aws lambda update-function-code --function-name api --zip-file fileb://api.zip
+gcloud compute instances delete web-1 --quiet
+az group delete --name acme-rg --yes
+stripe refunds create --charge ch_1
+curl -X POST https://api.stripe.com/v1/payouts -u sk_live_x: -d amount=5000
+curl -X DELETE https://api.github.com/repos/acme/app
+curl -X POST https://hooks.slack.com/services/T0/B0/xyz -d '{"text":"deployed"}'
+curl -X PUT https://api.cloudflare.com/client/v4/zones/z1/dns_records/r1 -d @record.json
+curl --data @payload.json https://api.acme.io/v1/orders
+http POST https://api.acme.io/v1/invoices amount=120
+psql $DATABASE_URL -c 'DROP TABLE users'
+psql $DATABASE_URL -c 'DELETE FROM invoices'
+mysql -e 'TRUNCATE orders'
+mongosh $MONGO_URL --eval 'db.users.deleteMany({})'
+redis-cli -u $REDIS_URL FLUSHALL
+sendmail client@example.com < invoice.txt
+mail -s "Invoice 1043" client@example.com < invoice.txt
+git reset --hard origin/main && git push -f
+bash -c "npm publish"
+sudo env NODE_ENV=production npm publish
+timeout 60 git push origin main
+echo v1.4.3 | xargs gh release create
