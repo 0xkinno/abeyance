@@ -13,7 +13,7 @@ def setup(parser) -> None:
     deny = sub.add_parser("deny", help="Drop a waiting step; nothing runs")
     deny.add_argument("code")
     test = sub.add_parser("test", help="Would this command wait for you?")
-    test.add_argument("command", nargs="+")
+    test.add_argument("cmdline", nargs="+", metavar="command")
     sub.add_parser("facts", help="Measured numbers behind the README (docs/FACTS.json)")
     sub.add_parser("demo", help="Scripted run, real Abeyance code, offline, about 5 seconds")
 
@@ -40,7 +40,7 @@ def handle(args, get_engine) -> int:
     elif cmd == "deny":
         print(eng.deny(args.code, "", "cli"))
     elif cmd == "test":
-        print(test_text(eng, " ".join(args.command)))
+        print(test_text(eng, " ".join(args.cmdline)))
     return 0
 
 
