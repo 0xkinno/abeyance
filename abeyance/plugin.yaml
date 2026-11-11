@@ -1,5 +1,5 @@
 name: abeyance
-version: 0.1.1
+version: 0.1.2
 description: "A Hermes cron run that waits for you at the one step it should not take alone, then finishes from that step when you say yes."
 author: 0xkinno
 license: MIT

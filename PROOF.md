@@ -7,7 +7,7 @@ Every number in the README comes from `docs/FACTS.json`, built by `scripts/facts
 # Hermes checkout and its venv (see .devcontainer/setup.sh), then:
 git clone --depth 1 https://github.com/NousResearch/hermes-agent reference/hermes-agent
 export HERMES_PY=/path/to/hermes-venv/bin/python
-python -m pytest -q tests                                   # 101 unit tests
+python -m pytest -q tests                                   # 106 unit tests
 python scripts/probe_hermes_detector.py reference/hermes-agent
 python eval/corpora.py                                      # both corpora, no execution
 $HERMES_PY eval/campaign.py                                 # 33 cases on the real loop, about 6 minutes

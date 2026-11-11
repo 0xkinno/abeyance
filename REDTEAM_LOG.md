@@ -19,3 +19,7 @@ honesty of claims, polish, catalog rules and creativity. None was clean. What wa
 
 The 33-case campaign on a real Hermes ran before these fixes. The new tests cover them offline (101 pass).
 Round 2 has not been run.
+
+## Maintainer review, 2026-11-11
+
+The catalog reviewer asked for the host-side git calls to be hardened (a repo-configured `core.fsmonitor` or filter driver could run with the host environment). Done in `drift.py`: minimal explicit environment, `-c core.fsmonitor=false -c core.hooksPath=/dev/null`, `stdin=DEVNULL`, `status` skipped when `filter.*` drivers exist. Tests: `tests/test_git_hardening.py`. When `status` is skipped, drift cannot see uncommitted changes; HEAD, branch, upstream and file hashes are still compared.

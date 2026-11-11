@@ -24,25 +24,45 @@ def digest(obj) -> str:
     return hashlib.sha256(json.dumps(obj, sort_keys=True, separators=(",", ":"), default=str).encode()).hexdigest()
 
 
+def _git_env() -> dict[str, str]:
+    """A minimal environment for host-side git: no provider keys, no user or system git config.
+
+    The job's folder is untrusted (an agent may have written to its .git/config), so nothing from the
+    host's environment is passed on."""
+    env = {k: os.environ[k] for k in ("PATH", "HOME", "LANG", "SYSTEMROOT", "USERPROFILE", "TEMP", "TMP") if k in os.environ}
+    env.update({"GIT_TERMINAL_PROMPT": "0", "GIT_OPTIONAL_LOCKS": "0", "GIT_CONFIG_NOSYSTEM": "1",
+                "GIT_CONFIG_GLOBAL": os.devnull})
+    return env
+
+
 def _git(cwd: str, *argv: str) -> str | None:
+    """Run one read-only git command with repo-configured helpers switched off."""
+    cmd = ["git", "-c", "core.fsmonitor=false", "-c", f"core.hooksPath={os.devnull}", "-C", cwd, *argv]
     try:
-        out = subprocess.run(["git", "-C", cwd, *argv], capture_output=True, text=True,
-                             timeout=GIT_TIMEOUT, env={**os.environ, "GIT_TERMINAL_PROMPT": "0", "GIT_OPTIONAL_LOCKS": "0"})
+        out = subprocess.run(cmd, capture_output=True, text=True, timeout=GIT_TIMEOUT,
+                             env=_git_env(), stdin=subprocess.DEVNULL)
     except (OSError, subprocess.SubprocessError):
         return None
     return out.stdout.strip() if out.returncode == 0 else None
 
 
+def _defines_filter_drivers(cwd: str) -> bool:
+    """`git status` can run a repo-defined clean/smudge filter, so it is skipped when one exists."""
+    return bool(_git(cwd, "config", "--local", "--get-regexp", r"^filter\."))
+
+
 def git_state(cwd: str) -> dict | None:
     if not cwd or _git(cwd, "rev-parse", "--is-inside-work-tree") != "true":
         return None
-    status = _git(cwd, "status", "--porcelain=v1", "--untracked-files=normal") or ""
+    skipped = _defines_filter_drivers(cwd)
+    status = "" if skipped else (_git(cwd, "status", "--porcelain=v1", "--untracked-files=normal") or "")
     return {
         "head": _git(cwd, "rev-parse", "HEAD"),
         "branch": _git(cwd, "rev-parse", "--abbrev-ref", "HEAD"),
         "upstream": _git(cwd, "rev-parse", "@{u}"),
         "status_digest": hashlib.sha256(status.encode()).hexdigest(),
         "dirty_files": len([l for l in status.splitlines() if l.strip()]),
+        "status_skipped": skipped,
     }
 
 

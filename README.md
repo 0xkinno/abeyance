@@ -177,7 +177,7 @@ Hermes's own detector flags 6 of 6 commands that damage the machine and 9 of 60 
 
 ## Disclosure
 
-Runs read-only local git (`rev-parse`, `status`) in the job's working folder to snapshot it; hashes up to 20 files the held step names plus package manifests; stores parks (the held command and arguments verbatim, not redacted, so a held command that carries a token is stored with it; a git snapshot, step summaries with up to 300-character output excerpts) and events in `<HERMES_HOME>/plugin-data/abeyance/` (SQLite). Never approves a step itself, never auto-approves, never changes `cron_mode`. No network calls, no credentials, no telemetry, no Python dependencies. The demo writes a throwaway git repo under the plugin data folder and removes it.
+Runs read-only local git (`rev-parse`, `status`) in the job's working folder to snapshot it, with a minimal environment (no provider keys, no user or system git config), `core.fsmonitor` and hooks switched off, no stdin, and `status` skipped when the repo defines `filter.*` drivers; hashes up to 20 files the held step names plus package manifests; stores parks (the held command and arguments verbatim, not redacted, so a held command that carries a token is stored with it; a git snapshot, step summaries with up to 300-character output excerpts) and events in `<HERMES_HOME>/plugin-data/abeyance/` (SQLite). Never approves a step itself, never auto-approves, never changes `cron_mode`. No network calls, no credentials, no telemetry, no Python dependencies. The demo writes a throwaway git repo under the plugin data folder and removes it.
 
 ## Run it locally
 
