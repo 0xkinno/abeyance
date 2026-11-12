@@ -23,6 +23,6 @@
  "model_calls_per_drift_refusal": 0,
  "real_run_release_url": "https://github.com/0xkinno/abeyance-demo/releases/tag/v0.0.2",
  "real_run_at": "2026-11-10T20:56:47Z",
- "tests_passed": 106,
+ "tests_passed": 108,
  "campaign_generated_at": "2026-11-10T17:53:07Z"
 }

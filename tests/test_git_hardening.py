@@ -67,3 +67,23 @@ def test_normal_repo_still_reports_uncommitted_changes(tmp_path):
     (repo / "b.txt").write_text("b")
     state = drift.git_state(str(repo))
     assert state["status_skipped"] is False and state["dirty_files"] == 1
+
+
+def test_a_filter_driver_defined_through_include_path_is_found(tmp_path):
+    (tmp_path / "repo").mkdir()
+    repo = _repo(tmp_path / "repo")
+    extra = tmp_path / "extra.gitconfig"
+    extra.write_text('[filter "evil"]\n\tclean = cat\n')
+    _git(repo, "config", "include.path", str(extra).replace("\\", "/"))
+    # the old check (--local) does not see an included file
+    local = subprocess.run(["git", "-C", str(repo), "config", "--local", "--get-regexp", r"^filter\."], capture_output=True, text=True)
+    assert local.stdout.strip() == ""
+    assert drift._defines_filter_drivers(str(repo)) is True
+    assert drift.git_state(str(repo))["status_skipped"] is True
+
+
+def test_a_filter_driver_in_config_worktree_is_found(tmp_path):
+    repo = _repo(tmp_path)
+    _git(repo, "config", "extensions.worktreeConfig", "true")
+    _git(repo, "config", "--worktree", "filter.evil.clean", "cat")
+    assert drift._defines_filter_drivers(str(repo)) is True

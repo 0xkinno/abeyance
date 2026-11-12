@@ -23,3 +23,7 @@ Round 2 has not been run.
 ## Maintainer review, 2026-11-11
 
 The catalog reviewer asked for the host-side git calls to be hardened (a repo-configured `core.fsmonitor` or filter driver could run with the host environment). Done in `drift.py`: minimal explicit environment, `-c core.fsmonitor=false -c core.hooksPath=/dev/null`, `stdin=DEVNULL`, `status` skipped when `filter.*` drivers exist. Tests: `tests/test_git_hardening.py`. When `status` is skipped, drift cannot see uncommitted changes; HEAD, branch, upstream and file hashes are still compared.
+
+## Maintainer review 2, 2026-11-12
+
+The filter-driver check used `git config --local`, which does not follow `include.path`, `includeIf` or `config.worktree`, while `git status` does. Now `git config --includes --get-regexp '^filter\.'` with no `--local` (system and global config are already nulled). Tests: a filter defined through `include.path` and one in `config.worktree` are both found and make `status` be skipped.

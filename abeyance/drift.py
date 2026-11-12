@@ -48,7 +48,9 @@ def _git(cwd: str, *argv: str) -> str | None:
 
 def _defines_filter_drivers(cwd: str) -> bool:
     """`git status` can run a repo-defined clean/smudge filter, so it is skipped when one exists."""
-    return bool(_git(cwd, "config", "--local", "--get-regexp", r"^filter\."))
+    # No --local: include.path, includeIf and config.worktree must be seen, because `git status` follows them.
+    # System and global config are already switched off by _git_env().
+    return bool(_git(cwd, "config", "--includes", "--get-regexp", r"^filter\."))
 
 
 def git_state(cwd: str) -> dict | None:
